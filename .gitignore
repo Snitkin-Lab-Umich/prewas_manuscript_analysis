@@ -1,0 +1,7 @@
+*.eps
+*.pdf
+*.out
+*.sbat
+*.txt
+.Rhistory
+._*

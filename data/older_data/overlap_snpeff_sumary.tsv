@@ -1,0 +1,10 @@
+Project	NumOverlapSites	NumIdenticalImpact	NumDifferentImpact	NumBadAnnot	NumHighHigh	NumHighModerate	NumHighLow	NumModerateModerate	NumModerateLow	NumLowLow	percent_different
+Cd_1	10	6	4	0	0	0	0	2	4	4	40
+Cd_3	120	60	60	0	0	7	8	21	45	39	50
+Cd_4	86	34	52	0	0	4	7	10	41	24	60.46511627906977
+Kp_1	74	23	51	0	0	5	2	16	44	7	68.91891891891892
+Kp_2	8	3	5	0	1	0	1	2	4	0	62.5
+Sa_2	38	15	23	0	0	3	4	15	16	0	60.526315789473685
+Efm_1	6	2	4	0	0	1	1	2	2	0	66.66666666666667
+Efs_1	20	6	14	0	0	0	4	6	10	0	70
+Lc_1	29	9	20	0	0	1	2	4	17	5	68.96551724137932
