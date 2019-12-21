@@ -23,6 +23,6 @@ All genome sequences available on NCBI (see Table S1).
 Katie Saund, Zena Lapp, and Stephanie N. Thiede all contributed code to this repository. 
 
 ### Citation
-prewas: Data pre-processing for more informative bacterial GWAS
-Katie Saund, Zena Lapp, Stephanie N. Thiede, Ali Pirani, Evan S Snitkin
-bioRxiv 2019.12.20.873158; doi: https://doi.org/10.1101/2019.12.20.873158
+prewas: Data pre-processing for more informative bacterial GWAS  
+Katie Saund, Zena Lapp, Stephanie N. Thiede, Ali Pirani, Evan S Snitkin  
+bioRxiv 2019.12.20.873158; doi: https://doi.org/10.1101/2019.12.20.873158  
