@@ -1,0 +1,10 @@
+object	hex_color
+low_color	#e5f5e0
+med_color	#a1d99b
+hi_color	#31a354
+ref_maj	#59fcdf 
+ref_anc	#59c8fc
+maj_anc	#5977fc
+low_mod	#efd9f4
+low_hi	#dfb1e8
+mod_hi	#cf8add

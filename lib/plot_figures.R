@@ -4,11 +4,11 @@ drop_projects <- c("Kp_2", "Cd_1", "Cd_2")
 # Libraries --------------------------------------------------------------------
 library(magrittr)
 library(ggplot2)
-source("../../2019-12-04_analysis_with_sbat/lib/multiallelic_lib.R")
+source("lib/multiallelic_lib.R")
 
 # Color palettes and project names ---------------------------------------------
-color_key <- read_tsv("../../data/plot_colors.tsv")
-project_key <- read_tsv("../../data/project_names_and_colors.tsv")
+color_key <- read_tsv("data/plot_colors.tsv")
+project_key <- read_tsv("data/project_names_and_colors.tsv")
 palette <-  project_key$hex_color
 names(palette) <- project_key$Dataset
 
