@@ -71,8 +71,8 @@ snp_mat_grouped %>%
   geom_line(size = default_line_size) +
   geom_point(size = 4) +
   theme_bw() +
-  scale_y_continuous(labels=scales::percent_format(accuracy = .1)) +
-  scale_x_continuous(labels=scales::percent) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = .1)) +
+  scale_x_continuous(labels = scales::percent) +
   scale_color_manual(values = palette) +
   ylab("All Multiallelic Sites / All Variant Sites") +
   xlab("Dataset Subset") +
@@ -110,7 +110,7 @@ variant_summary %>%
   scale_x_continuous(labels = scales::comma) +
   guides(color = FALSE) +
   theme(text = element_text(size = default_font_size)) +
-  scale_y_continuous(labels=scales::percent_format(accuracy = 0.1)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 0.1)) +
   annotate("text",
            size = rsquared_font_size,
            x = x_pos,
@@ -141,8 +141,7 @@ pheatmap::pheatmap(tri_functional_heatmap,
                    number_format = "%.0f",
                    height = default_height,
                    width = default_width,
-                   filename = "../figures/Figure_2C_multiallelic_impact.pdf")
-#dev.off()
+                   filename = "figures/Figure_2C_multiallelic_impact.pdf")
 pheatmap::pheatmap(tri_functional_heatmap,
                    color = heatMapCols,
                    cluster_rows = FALSE,
@@ -154,8 +153,7 @@ pheatmap::pheatmap(tri_functional_heatmap,
                    number_format = "%.0f",
                    height = default_height,
                    width = default_width,
-                   filename = "../figures/Figure_2C_multiallelic_impact.png")
-#dev.off()
+                   filename = "figures/Figure_2C_multiallelic_impact.png")
 
 # Figure S2: Multiallelic Sites
 ## S2A: % Multiallelic vs Number of Isolates -----------------------------
@@ -180,7 +178,7 @@ variant_summary %>%
   ylab("All Multiallelic Sites / All Variant Sites") +
   xlab("Samples") +
   scale_color_manual(values = palette) +
-  scale_y_continuous(labels=scales::percent_format(accuracy = 0.1)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 0.1)) +
   theme(text = element_text(size = default_font_size)) +
   annotate("text",
            size = rsquared_font_size,
@@ -220,7 +218,7 @@ functional_impact_long %>%
               size = default_dot_size) +
   scale_color_manual(values = palette) +
   theme(text = element_text(size = default_font_size)) +
-  scale_y_continuous(labels=scales::percent_format(accuracy = 1)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   theme(axis.text.x = element_text(color = "black"),
         axis.text.y = element_text(color = "black"))
 
@@ -248,7 +246,7 @@ functional_variant_summary_key_df %>%
   scale_fill_manual(values = palette)  +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   theme(legend.position = "none") +
-  scale_y_continuous(labels=scales::percent_format(accuracy = 1)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   theme(axis.text.x = element_text(color = "black"),
         axis.text.y = element_text(color = "black"))
 
@@ -266,7 +264,7 @@ convergence %>%
   geom_boxplot(size = default_line_size / 2) +
   theme_bw() +
   scale_color_manual(values = c("grey","black")) +
-  scale_y_continuous(labels=scales::percent) +
+  scale_y_continuous(labels = scales::percent) +
   xlab("Convergence Events Per SNP") +
   ylab("Relative Frequency") +
   scale_x_discrete(limits = c("0", "1", "2", "3", "4", "5", "6", "7", ">7")) +
@@ -294,8 +292,8 @@ fm$value = fm$value
 fm <- fm %>% filter(!Project %in% drop_projects)
 
 
-fm = fm %>% left_join(project_key, by='Project') %>% left_join(color_key,by='object')
-cairo_pdf(paste0('../figures/Figure_3A_allele_mismatch_correct_equals_sign.pdf'),width = 8, height = 6)#,device=cairo_pdf)
+fm = fm %>% left_join(project_key, by = 'Project') %>% left_join(color_key, by = 'object')
+cairo_pdf(paste0('../figures/Figure_3A_allele_mismatch_correct_equals_sign.pdf'), width = 8, height = 6)#,device=cairo_pdf)
 fm %>%
   ggplot(aes(x = reorder(Dataset, value),
              y = value,
@@ -309,7 +307,7 @@ fm %>%
                                color_key$hex_color[color_key$object == "ref_anc"],
                                color_key$hex_color[color_key$object == "maj_anc"])) +
   theme_bw() +
-  theme(axis.text.x=element_text(angle = 90, hjust = 1)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   theme(text = element_text(size = default_font_size * .8)) +
   theme(axis.text.x = element_text(color = "black"),
         axis.text.y = element_text(color = "black"))
@@ -321,18 +319,18 @@ dataset_order = mean_mismatches$Dataset[order(mean_mismatches$`mean(value)`)]
 
 
 names(anc_probs)[1] = 'Project'
-anc_probs = anc_probs %>% left_join(project_key, by='Project')
+anc_probs = anc_probs %>% left_join(project_key, by = 'Project')
 
 anc_probs = anc_probs %>%
-  group_by(Dataset,low_conf=anc_prob < 0.875) %>%
-  summarise(count=n()) %>%
-  mutate(perc=count/sum(count))
+  group_by(Dataset,low_conf = anc_prob < 0.875) %>%
+  summarise(count = n()) %>%
+  mutate(perc = count/sum(count))
 
 anc_probs$hex_color = sapply(anc_probs$Dataset,function(x) project_key$hex_color[project_key$Dataset == x])
 
 ggplot(anc_probs[anc_probs$low_conf == TRUE,],
        aes(x = reorder(Dataset, perc),y = perc, fill = Dataset)) +
-  geom_bar(stat ='identity') +
+  geom_bar(stat = 'identity') +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   scale_fill_manual(values = palette) +
   scale_x_discrete(limits = dataset_order) +
