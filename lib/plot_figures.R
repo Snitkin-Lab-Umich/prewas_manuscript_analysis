@@ -21,17 +21,17 @@ default_dot_size <- 8
 default_line_size <- 2
 
 save_as_pdf_eps_png <- function(file_prefix, width_size, height_size){
-  ggsave(filename = paste0("../figures/", file_prefix, ".pdf"),
+  ggsave(filename = paste0("figures/", file_prefix, ".pdf"),
          width = width_size,
          height = height_size,
          units = "in",
          device = "pdf")
-  ggsave(filename = paste0("../figures/", file_prefix, ".eps"),
+  ggsave(filename = paste0("figures/", file_prefix, ".eps"),
          width = width_size,
          height = height_size,
          units = "in",
          device = "eps")
-  ggsave(filename = paste0("../figures/", file_prefix, ".png"),
+  ggsave(filename = paste0("figures/", file_prefix, ".png"),
          width = width_size,
          height = height_size,
          units = "in",
@@ -39,16 +39,16 @@ save_as_pdf_eps_png <- function(file_prefix, width_size, height_size){
 }
 
 # Read in Multiallelic Data ----------------------------------------------------
-variant_summary <- read_tsv("../data/multiallelic_summary.tsv")
-snp_mat_summary <- read_tsv("../data/multiallelic_summary_subsampled.tsv")
-snp_mat_grouped <- read_tsv("../data/multiallelic_summary_by_project.tsv")
+variant_summary <- read_tsv("data/multiallelic_summary.tsv")
+snp_mat_summary <- read_tsv("data/multiallelic_summary_subsampled.tsv")
+snp_mat_grouped <- read_tsv("data/multiallelic_summary_by_project.tsv")
 
 
-functional_impact_long <- read_tsv("../data/SNP_diversity_long.tsv")
-functional_variant_summary <- read_tsv(file = "../data/snpeff_multiallelic_summary.tsv")
-tri_functional_summary <- read_tsv(file = "../data/snpeff_triallelic_summary.tsv")
-tri_functional_heatmap <- read.csv(file = "../data/triallelic_heatmap.csv", row.names = 1)
-convergence <- read_tsv(file = "../data/convergence.tsv")
+functional_impact_long <- read_tsv("data/SNP_diversity_long.tsv")
+functional_variant_summary <- read_tsv(file = "data/snpeff_multiallelic_summary.tsv")
+tri_functional_summary <- read_tsv(file = "data/snpeff_triallelic_summary.tsv")
+tri_functional_heatmap <- read.csv(file = "data/triallelic_heatmap.csv", row.names = 1)
+convergence <- read_tsv(file = "data/convergence.tsv")
 
 # Filter out datasets to exclude:
 variant_summary <- variant_summary %>% filter(!Project %in% drop_projects)
