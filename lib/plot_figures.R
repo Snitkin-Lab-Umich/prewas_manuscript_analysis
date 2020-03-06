@@ -105,7 +105,7 @@ variant_summary %>%
               color = "black",
               size = default_line_size) +
   scale_color_manual(values = palette) +
-  ylab("Multiallelic Sites / Variant Sites") +
+  ylab("All Multiallelic Sites / All Variant Sites") +
   xlab("Mean Pairwise SNP Distance (BP)") +
   scale_x_continuous(labels = scales::comma) +
   guides(color = FALSE) +
@@ -177,7 +177,7 @@ variant_summary %>%
               se = FALSE,
               color = "black",
               size = default_line_size) +
-  ylab("Multiallelic Sites / All Variant Sites") +
+  ylab("All Multiallelic Sites / All Variant Sites") +
   xlab("Samples") +
   scale_color_manual(values = palette) +
   scale_y_continuous(labels=scales::percent_format(accuracy = 0.1)) +
@@ -213,7 +213,7 @@ functional_impact_long %>%
   geom_boxplot(color = "black",
                alpha = 1.0,
                size = default_line_size) +
-  ylab("Multiallelic Sites / All Variant Sites") +
+  ylab("Multiallelic Sites / Variant Sites") +
   xlab("Predicted Functional Impact") +
   theme_bw() +
   geom_jitter(aes(color = Dataset),
@@ -342,7 +342,7 @@ ggplot(anc_probs[anc_probs$low_conf == TRUE,],
   theme(text = element_text(size = default_font_size * .8)) +
   theme(legend.position = "none") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-
+  
   theme(axis.text.x = element_text(color = "black"),
         axis.text.y = element_text(color = "black"))
 save_as_pdf_eps_png("Figure_3B_ancestral_reconstruction",
