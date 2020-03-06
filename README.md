@@ -1,11 +1,6 @@
 # prewas manuscript analysis
 
-This repository contains the data and R scripts in support of a manuscript submitted to biorxiv. The focus of this work is to assess the potential impact of SNP pre-processing choices on bGWAS results.  
-
-The preprint will be available soon on biorxiv. 
-
-### Manuscript Title
-prewas: Data pre-processing for more informative bacterial GWAS
+This repository contains the data and R scripts in support of the manuscript: [prewas: Data pre-processing for more informative bacterial GWAS](https://www.biorxiv.org/content/10.1101/2019.12.20.873158v1). The focus of this work is to assess the potential impact of variant pre-processing choices on bGWAS results.  
   
 ### Mansucript Authors
 Katie Saund* (https://orcid.org/0000-0002-6214-6713), Zena Lapp* (https://orcid.org/0000-0003-4674-2176), Stephanie N. Thiede* (https://orcid.org/0000-0003-0173-4324), Ali Pirani (https://orcid.org/0000-0001-7810-0982), and Evan S. Snitkin (https://orcid.org/0000-0001-8409-278X)
