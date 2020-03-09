@@ -276,14 +276,13 @@ save_as_pdf_eps_png("Figure_S2D_convergence",
                     default_height)
 
 # Read in Reference Allele Data ------------------------------------------------
-frac_mismatch = read.table('../data/frac_mismatch.tsv')
-num_mismatch = read.table('../data/num_mismatch.tsv')
-anc_probs = read.table('../data/anc_probs.tsv')
+frac_mismatch = read.table('data/frac_mismatch.tsv')
+num_mismatch = read.table('data/num_mismatch.tsv')
+anc_probs = read.table('data/anc_probs.tsv')
 
 anc_probs <- anc_probs %>% filter(!dat %in% drop_projects)
 
 # Figure 3: Reference Allele Plots ---------------------------------------------
-
 # 3A: Mismatch counts for each dataset------------------------------------------
 fm = melt(frac_mismatch, variable.name = 'object')
 fm$Project = rep(rownames(frac_mismatch), ncol(frac_mismatch))
@@ -293,7 +292,7 @@ fm <- fm %>% filter(!Project %in% drop_projects)
 
 
 fm = fm %>% left_join(project_key, by = 'Project') %>% left_join(color_key, by = 'object')
-cairo_pdf(paste0('../figures/Figure_3A_allele_mismatch_correct_equals_sign.pdf'), width = 8, height = 6)#,device=cairo_pdf)
+cairo_pdf(paste0('figures/Figure_3A_allele_mismatch_correct_equals_sign.pdf'), width = 8, height = 6)#,device=cairo_pdf)
 fm %>%
   ggplot(aes(x = reorder(Dataset, value),
              y = value,
@@ -348,10 +347,10 @@ save_as_pdf_eps_png("Figure_3B_ancestral_reconstruction",
                     default_height)
 
 # Read in Overlap Data ---------------------------------------------------------
-overlap_func_impact_long <- read_tsv("../data/overlap_diversity_long.tsv")
-overlap_snpeff_summary <- read_tsv("../data/overlap_snpeff_sumary.tsv")
-overlap_heatmap <- read_tsv("../data/overlap_heatmap.tsv")
-overlap_stats <- read_tsv("../data/overlap_stats.tsv")
+overlap_func_impact_long <- read_tsv("data/overlap_diversity_long.tsv")
+overlap_snpeff_summary <- read_tsv("data/overlap_snpeff_sumary.tsv")
+overlap_heatmap <- read_tsv("data/overlap_heatmap.tsv")
+overlap_stats <- read_tsv("data/overlap_stats.tsv")
 
 overlap_stats <- overlap_stats %>% filter(!Project %in% drop_projects)
 overlap_func_impact_long <- overlap_func_impact_long %>%
@@ -396,73 +395,6 @@ long_overlap_snpeff_summary %>%
 save_as_pdf_eps_png("Figure_4A_overlap_functional_impact",
                     default_width,
                     default_height)
-
-## No longer included: SNPEFF impact (Overlap vs any variant) split by diveristy (hi vs low)----
-# impact_level_order <- c("Low", "Moderate", "High")
-# overlap_func_impact_long <-
-#   overlap_func_impact_long %>%
-#   filter(variable != "Baseline")
-#
-# overlap_func_impact_long$variable2 <-
-#   factor(overlap_func_impact_long$variable, levels = impact_level_order)
-#
-# overlap_func_impact_long %>%
-#   left_join(project_key, by = "Project") %>%
-#   ggplot(aes(x = variable2, y = value * 100)) +
-#   geom_boxplot(color = "black",
-#                alpha = 1.0) +
-#   ylab("Frequency at Overlapping Sites (%)") +
-#   xlab("Predicted Functional Impact") +
-#   theme_bw() +
-#   geom_jitter(aes(color = Dataset)) +
-#   scale_color_manual(values = palette) +
-#   theme(axis.text.x = element_text(color = "black"),
-#         axis.text.y = element_text(color = "black"))
-
-
-## No longer included: Barplot of % of overlapping sites with mismatching SNPEFF impact-------------
-# overlap_snpeff_summary %>%
-#   left_join(project_key, by = "Project") %>%
-#   select(c(percent_different, Dataset, hex_color)) %>%
-#   ggplot() +
-#   geom_bar(mapping = aes(x = reorder(Dataset, percent_different),
-#                          y = percent_different,
-#                          color = Dataset),
-#            fill = "white",
-#            size = 2,
-#            stat = "identity") +
-#   scale_color_manual(values = palette)  +
-#   theme_bw() +
-#   ylab("Functional impact mismatches (% overlaping sites)") +
-#   xlab("") +
-#   ylim(c(0.0, 100)) +
-#   theme(legend.position = "none") +
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-#   theme(axis.text.x = element_text(color = "black"),
-#         axis.text.y = element_text(color = "black"))
-## Heatmap of all overlapping site SNPEFF impact groupings
-# overlap_heatmap <- as.matrix(overlap_heatmap[1:3, 2:4])
-# row.names(overlap_heatmap) <- c("High", "Moderate", "Low")
-#
-# whiteToRed = colorRampPalette(c("white", "purple"))
-# # We want a unique shade of red for each level of the gene
-# numColors = length(min(overlap_heatmap):max(overlap_heatmap))
-# # Generate a character vector of colors with each shade of red
-# heatMapCols = whiteToRed(numColors)
-#
-# pheatmap::pheatmap((overlap_heatmap),
-#                    color = heatMapCols,
-#                    cluster_rows = FALSE,
-#                    cluster_cols = FALSE,
-#                    display_numbers = TRUE,
-#                    border_color = "black",
-#                    number_format = "%.0f",
-#                    fontsize = 20,
-#                    angle_col = 0,
-#                    filename = "../figures/overlap_mismatch_impact_heatmap.pdf")
-#
-# dev.off()
-
 
 # Figure S3 --------------------------------------------------------------------
 ## S3A Number of Overlapping Genes ----------------------------------------------
@@ -550,4 +482,3 @@ range(tri_functional_summary$NumDifferentImpact,na.rm = T)
 'Percent:'
 range(tri_functional_summary$NumDifferentImpact/tri_functional_summary$NumMultiallelicSites,na.rm = T)
 sink()
-

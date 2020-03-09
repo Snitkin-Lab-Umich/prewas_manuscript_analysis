@@ -2,9 +2,9 @@ object	hex_color
 low_color	#e5f5e0
 med_color	#a1d99b
 hi_color	#31a354
-ref_maj	#59fcdf 
-ref_anc	#59c8fc
-maj_anc	#5977fc
-low_mod	#efd9f4
-low_hi	#dfb1e8
-mod_hi	#cf8add
+ref_maj	#9A6324
+ref_anc	#42d4f4
+maj_anc	#fabebe
+low_mod	#5fc974
+low_hi	#985fc9
+mod_hi	#c98f5f
