@@ -1,4 +1,4 @@
-# Note: Kp_2, Cd_1, and Cd_2 must be excluded from draft 1 of the paper
+# Note: Kp_2, Cd_1, and Cd_2 must be excluded
 drop_projects <- c("Kp_2", "Cd_1", "Cd_2")
 
 # Libraries --------------------------------------------------------------------
@@ -292,7 +292,6 @@ fm <- fm %>% filter(!Project %in% drop_projects)
 
 
 fm = fm %>% left_join(project_key, by = 'Project') %>% left_join(color_key, by = 'object')
-cairo_pdf(paste0('figures/Figure_3A_allele_mismatch_correct_equals_sign.pdf'), width = 8, height = 6)#,device=cairo_pdf)
 fm %>%
   ggplot(aes(x = reorder(Dataset, value),
              y = value,
@@ -301,16 +300,22 @@ fm %>%
   xlab('') +
   ylab('Reference allele mismatch') +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
-  scale_fill_manual(name = "Mismatched Allele",labels = c("Ref. Genome \u2260 Major", "Ref. Genome \u2260 Ancestral", "Major \u2260 Ancestral"),
+  scale_fill_manual(name = "Mismatched Allele", 
+                    labels = c(expression(paste("Ref. Genome" != "Major"), 
+                               paste("Ref. Genome" != "Ancestral"), 
+                               paste("Major" != "Ancestral"))),
                     values = c(color_key$hex_color[color_key$object == "ref_maj"],
                                color_key$hex_color[color_key$object == "ref_anc"],
                                color_key$hex_color[color_key$object == "maj_anc"])) +
   theme_bw() +
+  theme(legend.text.align = 0) + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   theme(text = element_text(size = default_font_size * .8)) +
   theme(axis.text.x = element_text(color = "black"),
         axis.text.y = element_text(color = "black"))
-dev.off()
+save_as_pdf_eps_png("Figure_3A_allele_mismatch_correct_equals_sign",
+                    default_width,
+                    default_height)
 
 # 3B: Ancestral state confidence for each dataset-------------------------------
 mean_mismatches = fm %>% group_by(Dataset) %>% summarise(mean(value))
