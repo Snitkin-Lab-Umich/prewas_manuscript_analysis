@@ -1,0 +1,13 @@
+name: prewas_manuscript
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+  - r
+dependencies:
+  - r-tidyverse=1.2.1
+  - r-formattable=0.2.0.1
+  - r-htmltools=0.4.0
+  - r-webshot=0.5.1
+  - r-reshape2=1.4.3
+  - r-magrittr=1.5
