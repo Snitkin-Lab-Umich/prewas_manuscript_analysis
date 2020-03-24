@@ -543,11 +543,11 @@ time_plot <- usage_df %>%
 legend <- get_legend(time_plot)
 
 time_plot <- time_plot + theme(legend.position = "none")
-pdf("figures/hogwash_resource_usage.pdf", width = 16, height = 6)
+pdf("figures/Figure_S6A_prewas_resource_usage.pdf", width = 16, height = 6)
 grid.arrange(memory_plot, time_plot, legend, ncol = 3)
 dev.off()
 
-png("figures/hogwash_resource_usage.png", width = 16, height = 6, units = "in", res = 500)
+png("figures/Figure_S6B_prewas_reource_usage.png", width = 16, height = 6, units = "in", res = 500)
 grid.arrange(memory_plot, time_plot, legend, ncol = 3)
 dev.off()
 
