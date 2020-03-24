@@ -21,7 +21,7 @@ her_ests$phen_type[her_ests$phen_type == 'wn'] = 'WN'
 he = her_ests[her_ests$pw_type == 'multi',]
 he$diff = (her_ests$her_est[her_ests$pw_type == 'multi'] - her_ests$her_est[her_ests$pw_type == 'no multi'])*100
 
-pdf('figures/her_ests_boxplot.pdf',width = 6,height = 4)
+pdf('figures/Figure_S3_heritability_estimate_differences.pdf',width = 6,height = 4)
 ggplot(he, aes(x=phen_type,y=diff)) + geom_boxplot() + geom_jitter(aes(col=dataset),size=3) + facet_grid(cols = vars(prewas_run)) + 
   xlab('Phenotype Evolutionary Model') + ylab('Heritability with multiallelic -\nHeritability without multiallelic (%)') + 
   scale_color_manual(name = 'Dataset',values = colors, labels = proj_name) + 
