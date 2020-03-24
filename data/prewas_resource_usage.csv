@@ -1,0 +1,64 @@
+Time (Hours),Memory (GB),Project,Method,Tree,Cores (#),Variants (#)
+0.253,3.57,Cd_3,Major Allele,No Tree Provided,1,459977
+4.565,4.04,Cd_3,Ancestral Reconstruction,No Tree Provided,1,459977
+2.919,7.55,Cd_3,Ancestral Reconstruction,No Tree Provided,4,459977
+2.771,13.61,Cd_3,Ancestral Reconstruction,No Tree Provided,10,459977
+3.718,4.03,Cd_3,Ancestral Reconstruction,Tree Provided,1,459977
+1.004,7.65,Cd_3,Ancestral Reconstruction,Tree Provided,4,459977
+0.58,13.62,Cd_3,Ancestral Reconstruction,Tree Provided,10,459977
+0.493,6.45,Cd_4,Major Allele,No Tree Provided,1,410552
+29.779,7.5,Cd_4,Ancestral Reconstruction,No Tree Provided,1,410552
+9.398,13.07,Cd_4,Ancestral Reconstruction,No Tree Provided,4,410552
+12.491,22.58,Cd_4,Ancestral Reconstruction,No Tree Provided,10,410552
+7.636,7.82,Cd_4,Ancestral Reconstruction,Tree Provided,1,410552
+2.126,12.77,Cd_4,Ancestral Reconstruction,Tree Provided,4,410552
+1.002,23.65,Cd_4,Ancestral Reconstruction,Tree Provided,10,410552
+0.006,0,Efm_1,Major Allele,No Tree Provided,1,27368
+0.994,0.70995,Efm_1,Ancestral Reconstruction,No Tree Provided,1,27368
+1.035,1.77,Efm_1,Ancestral Reconstruction,No Tree Provided,4,27368
+0.625,3.62,Efm_1,Ancestral Reconstruction,No Tree Provided,10,27368
+0.47,0.54007,Efm_1,Ancestral Reconstruction,Tree Provided,1,27368
+0.122,1.77,Efm_1,Ancestral Reconstruction,Tree Provided,4,27368
+0.056,3.61,Efm_1,Ancestral Reconstruction,Tree Provided,10,27368
+0.016,1,Efs_1,Major Allele,No Tree Provided,1,60813
+2.437,1.27,Efs_1,Ancestral Reconstruction,No Tree Provided,1,60813
+1.913,2.61,Efs_1,Ancestral Reconstruction,No Tree Provided,4,60813
+1.767,5.12,Efs_1,Ancestral Reconstruction,No Tree Provided,10,60813
+1.041,1.01,Efs_1,Ancestral Reconstruction,Tree Provided,1,60813
+0.299,2.48,Efs_1,Ancestral Reconstruction,Tree Provided,4,60813
+0.13,4.91,Efs_1,Ancestral Reconstruction,Tree Provided,10,60813
+0.058,4.41,Kp_1,Major Allele,No Tree Provided,1,116645
+9.211,5.65,Kp_1,Ancestral Reconstruction,No Tree Provided,1,116645
+4.423,8.38,Kp_1,Ancestral Reconstruction,No Tree Provided,4,116645
+2.601,15.48,Kp_1,Ancestral Reconstruction,No Tree Provided,10,116645
+4.349,5.27,Kp_1,Ancestral Reconstruction,Tree Provided,1,116645
+1.156,8.55,Kp_1,Ancestral Reconstruction,Tree Provided,4,116645
+0.531,15.84,Kp_1,Ancestral Reconstruction,Tree Provided,10,116645
+0.012,0.49828,Lc_1,Major Allele,No Tree Provided,1,61504
+0.314,0.51241,Lc_1,Ancestral Reconstruction,No Tree Provided,1,61504
+0.284,1.64,Lc_1,Ancestral Reconstruction,No Tree Provided,4,61504
+0.158,3.31,Lc_1,Ancestral Reconstruction,No Tree Provided,10,61504
+0.305,0.50782,Lc_1,Ancestral Reconstruction,Tree Provided,1,61504
+0.087,1.55,Lc_1,Ancestral Reconstruction,Tree Provided,4,61504
+0.044,3.23,Lc_1,Ancestral Reconstruction,Tree Provided,10,61504
+0.022,1.49,Sa_1,Major Allele,No Tree Provided,1,128614
+1.518,1.76,Sa_1,Ancestral Reconstruction,No Tree Provided,1,128614
+1.314,3.69,Sa_1,Ancestral Reconstruction,No Tree Provided,4,128614
+0.702,6.48,Sa_1,Ancestral Reconstruction,No Tree Provided,10,128614
+0.966,1.48,Sa_1,Ancestral Reconstruction,Tree Provided,1,128614
+0.27,3.33,Sa_1,Ancestral Reconstruction,Tree Provided,4,128614
+0.122,6.25,Sa_1,Ancestral Reconstruction,Tree Provided,10,128614
+0.038,2.24,Sa_2,Major Allele,No Tree Provided,1,91744
+5.007,2.7,Sa_2,Ancestral Reconstruction,No Tree Provided,1,91744
+2.693,4.87,Sa_2,Ancestral Reconstruction,No Tree Provided,4,91744
+2.874,9.3,Sa_2,Ancestral Reconstruction,No Tree Provided,10,91744
+2.985,2.43,Sa_2,Ancestral Reconstruction,Tree Provided,1,91744
+0.792,4.74,Sa_2,Ancestral Reconstruction,Tree Provided,4,91744
+0.357,9.29,Sa_2,Ancestral Reconstruction,Tree Provided,10,91744
+0.604,9.91,Sm_1,Major Allele,No Tree Provided,1,1049643
+39.087,11.86,Sm_1,Ancestral Reconstruction,No Tree Provided,1,1049643
+20.272,18.08,Sm_1,Ancestral Reconstruction,No Tree Provided,4,1049643
+32.974,26.51,Sm_1,Ancestral Reconstruction,No Tree Provided,10,1049643
+6.787,11.85,Sm_1,Ancestral Reconstruction,Tree Provided,1,1049643
+2.092,17.28,Sm_1,Ancestral Reconstruction,Tree Provided,4,1049643
+1.214,28.15,Sm_1,Ancestral Reconstruction,Tree Provided,10,1049643
