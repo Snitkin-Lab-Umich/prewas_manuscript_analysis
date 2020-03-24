@@ -4,6 +4,8 @@ drop_projects <- c("Kp_2", "Cd_1", "Cd_2")
 # Libraries --------------------------------------------------------------------
 library(magrittr)
 library(ggplot2)
+library(tidyverse)
+library(gridExtra)
 source("lib/multiallelic_lib.R")
 
 # Color palettes and project names ---------------------------------------------
@@ -481,6 +483,74 @@ overlap_stats %>%
 save_as_pdf_eps_png("Figure_S5B_overlap_gene_count",
                     default_width,
                     default_height)
+
+## S6 Resource Usage -----------------------------------------------------------
+usage_df <- read_csv("data/prewas_resource_usage.csv")
+colnames(usage_df)[3] <- "Dataset"
+for (i in 1:nrow(usage_df)) {
+  for  (j in 1:nrow(project_key)) {
+    if (usage_df$Dataset[i] == project_key$Project[j]) {
+      usage_df$Dataset[i] <- project_key$Dataset[j]
+    }
+  }
+}
+
+
+resource_palette <- palette[names(palette) %in% usage_df$Dataset] 
+storage.mode(usage_df$`Cores (#)`) <- "character"
+get_legend <- function(myggplot){
+  # This function is from http://www.sthda.com/english/wiki/wiki.php?id_contents=7930
+  tmp <- ggplot_gtable(ggplot_build(myggplot))
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  legend <- tmp$grobs[[leg]]
+  return(legend)
+}
+
+# Remove cores == 4
+usage_df <- usage_df %>% filter(`Cores (#)` != "4")
+
+memory_plot <- usage_df %>% 
+  ggplot(aes(x = `Variants (#)`, y = `Memory (GB)`)) + 
+  geom_point(aes(shape = Tree, 
+                 size = `Cores (#)`, 
+                 color = Dataset)) + 
+  theme_bw() + 
+  ylim(0, 30) + 
+  theme(legend.position = "none") + 
+  theme(text = element_text(size = 15),
+        axis.text.x = element_text(color = "black", angle = 90, vjust = 0.5),
+        axis.text.y = element_text(color = "black")) + 
+  scale_color_manual(values = resource_palette) +
+  scale_size_discrete(range = c(1.5, 3)) + 
+  facet_wrap(~ Method) +
+  scale_y_continuous(minor_breaks = seq(1, 30, 1))
+
+time_plot <- usage_df %>% 
+  ggplot(aes(x = `Variants (#)`, y = `Time (Hours)`)) + 
+  geom_point(aes(shape = Tree, 
+                 size = `Cores (#)`, 
+                 color = Dataset)) + 
+  theme_bw() + 
+  ylim(0, max(usage_df$`Time (Hours)`)) + 
+  theme(text = element_text(size = 15),
+        axis.text.x = element_text(color = "black", angle = 90, vjust = 0.5),
+        axis.text.y = element_text(color = "black")) + 
+  scale_color_manual(values = resource_palette) +
+  scale_size_discrete(range = c(1.5, 3)) + 
+  facet_wrap(~ Method) +
+  scale_y_continuous(minor_breaks = seq(1, 40, 1))
+
+legend <- get_legend(time_plot)
+
+time_plot <- time_plot + theme(legend.position = "none")
+pdf("figures/hogwash_resource_usage.pdf", width = 16, height = 6)
+grid.arrange(memory_plot, time_plot, legend, ncol = 3)
+dev.off()
+
+png("figures/hogwash_resource_usage.png", width = 16, height = 6, units = "in", res = 500)
+grid.arrange(memory_plot, time_plot, legend, ncol = 3)
+dev.off()
+
 
 
 sink("data/numbers_for_paper.txt")
