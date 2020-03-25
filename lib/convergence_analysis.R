@@ -1,5 +1,5 @@
-data_dir <- "../../2019-10-12_count_convergence/data/"
-source("../../2019-12-04_analysis_with_sbat/lib/multiallelic_lib.R")
+data_dir <- "data/convergence/"
+source("lib/multiallelic_lib.R")
 bi_mat <- "_biallelic_transition_matrix.csv"
 multi_mat <- "_multiallelic_transition_matrix.csv"
 mat <- "_transition_matrix.csv"
