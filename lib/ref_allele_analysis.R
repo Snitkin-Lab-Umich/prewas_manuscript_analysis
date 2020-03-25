@@ -13,16 +13,16 @@ files = list.files('data/snp_matrices_and_parsed_data/',pattern = 'annot',full.n
 
 frac_mismatch = matrix(NA,nrow=length(files),ncol=3)
 colnames(frac_mismatch) = c('ref_maj','ref_anc','maj_anc')
-rownames(frac_mismatch) = gsub('.*//|_annot_split_no_overlap_no_ig.tsv','',files)
+rownames(frac_mismatch) = gsub('.*//|_annot_split_no_overlap_no_ig.tsv|.gz','',files)
 
 num_mismatch = matrix(NA,nrow=length(files),ncol=6)
 colnames(num_mismatch) = c('ref_maj','ref_anc','maj_anc','ref_ref','maj_maj','anc_anc')
-rownames(num_mismatch) = gsub('.*//|_annot_split_no_overlap_no_ig.tsv','',files)
+rownames(num_mismatch) = gsub('.*//|_annot_split_no_overlap_no_ig.tsv|.gz','',files)
 
 anc_probs = data.frame(dat=NA,anc_prob=NA)
 
 for(f in files){
-  pref = gsub('.*//|_annot_split_no_overlap_no_ig.tsv','',f)
+  pref = gsub('.*//|_annot_split_no_overlap_no_ig.tsv|.gz','',f)
   print(pref)
   annots = read.delim(f,stringsAsFactors = F)
   anc_prob = as.numeric(annots$anc_prob)
