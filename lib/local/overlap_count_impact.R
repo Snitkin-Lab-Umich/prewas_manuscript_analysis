@@ -1,22 +1,8 @@
 # Goal: find all of the SNPs in overlapping positions per dataset. 
 
 library(tidyverse)
-source("lib/multiallelic_lib.R")
+source("lib/local/multiallelic_lib.R")
 num_project <- nrow(project_df)
-
-# Functions --------------------------------------------------------------------
-load_parsed_snpmat_by_project <- function(project_name) {
-  mat <- NULL
-  fname <- paste0('data/snp_matrices_and_parsed_data/', 
-                  project_name,
-                  '_parsed.RData')
-  if (file.exists(fname)) {
-    mat <- local(get(load(fname)))
-  } else {
-    print("File not found")
-  }
-  return(mat)
-}
 
 # Get overlap info -------------------------------------------------------------
 for (i in 1:num_project) {

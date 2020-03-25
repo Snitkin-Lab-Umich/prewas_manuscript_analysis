@@ -227,3 +227,16 @@ load_project_snpmat <- function(project_name){
   }
   return(mat)
 }
+
+load_parsed_snpmat_by_project <- function(project_name) {
+  mat <- NULL
+  fname <- paste0('data/hpc/snp_matrices_and_parsed_data/', 
+                  project_name,
+                  '_parsed.RData')
+  if (file.exists(fname)) {
+    mat <- local(get(load(fname)))
+  } else {
+    print("File not found")
+  }
+  return(mat)
+}
