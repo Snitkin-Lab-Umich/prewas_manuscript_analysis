@@ -276,9 +276,9 @@ save_as_pdf_eps_png("Figure_S2D_convergence",
                     default_height)
 
 # Read in Reference Allele Data ------------------------------------------------
-frac_mismatch = read.table('data/frac_mismatch.tsv')
-num_mismatch = read.table('data/num_mismatch.tsv')
-anc_probs = read.table('data/anc_probs.tsv')
+frac_mismatch = read.table('data/local/ref_allele/frac_mismatch.tsv')
+num_mismatch = read.table('data/local/ref_allele/num_mismatch.tsv')
+anc_probs = read.table('data/local/ref_allele/anc_probs.tsv')
 
 anc_probs <- anc_probs %>% filter(!dat %in% drop_projects)
 
