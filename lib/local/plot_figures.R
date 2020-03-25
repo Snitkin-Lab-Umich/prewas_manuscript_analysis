@@ -276,9 +276,9 @@ save_as_pdf_eps_png("Figure_S2D_convergence",
                     default_height)
 
 # Read in Reference Allele Data ------------------------------------------------
-frac_mismatch = read.table('data/local/frac_mismatch.tsv')
-num_mismatch = read.table('data/local/num_mismatch.tsv')
-anc_probs = read.table('data/local/anc_probs.tsv')
+frac_mismatch = read.table('data/frac_mismatch.tsv')
+num_mismatch = read.table('data/num_mismatch.tsv')
+anc_probs = read.table('data/anc_probs.tsv')
 
 anc_probs <- anc_probs %>% filter(!dat %in% drop_projects)
 
@@ -352,10 +352,10 @@ save_as_pdf_eps_png("Figure_3B_ancestral_reconstruction",
                     default_height)
 
 # Read in Overlap Data ---------------------------------------------------------
-overlap_func_impact_long <- read_tsv("data/local/overlap_diversity_long.tsv")
-overlap_snpeff_summary <- read_tsv("data/local/overlap_snpeff_summary.tsv")
-overlap_heatmap <- read_tsv("data/local/overlap_heatmap.tsv")
-overlap_stats <- read_tsv("data/local/overlap_stats.tsv")
+overlap_func_impact_long <- read_tsv("data/local/overlap/overlap_diversity_long.tsv")
+overlap_snpeff_summary <- read_tsv("data/local/overlap/overlap_snpeff_summary.tsv")
+overlap_heatmap <- read_tsv("data/local/overlap/overlap_heatmap.tsv")
+overlap_stats <- read_tsv("data/local/overlap/overlap_stats.tsv")
 
 overlap_stats <- overlap_stats %>% filter(!Project %in% drop_projects)
 overlap_func_impact_long <- overlap_func_impact_long %>%
@@ -404,7 +404,7 @@ save_as_pdf_eps_png("Figure_4A_overlap_functional_impact",
 
 # Figure S3 Heritability Estimate Differences
 cols = project_key 
-her_ests = read.csv('data/hpc/her_ests.csv', header = F, stringsAsFactors = F)
+her_ests = read.csv('data/her_ests.csv', header = F, stringsAsFactors = F)
 colors = cols$hex_color
 names(colors) = cols$Project
 proj_name = cols$Dataset
@@ -427,7 +427,7 @@ ggplot(he, aes(x=phen_type,y=diff)) + geom_boxplot() + geom_jitter(aes(col=datas
   xlab('Phenotype Evolutionary Model') + ylab('Heritability with multiallelic -\nHeritability without multiallelic (%)') + 
   scale_color_manual(name = 'Dataset',values = colors, labels = proj_name) + 
   theme_bw() +
-  theme(text = element_text(size=10))
+  theme(text = element_text(size = 10))
 
 save_as_pdf_eps_png("Figure_S3_heritability_estimate_differences", 6, 4)
 
@@ -483,7 +483,7 @@ save_as_pdf_eps_png("Figure_S5B_overlap_gene_count",
                     default_height)
 
 ## S6 Resource Usage -----------------------------------------------------------
-usage_df <- read_csv("data/hpc/prewas_resource_usage.csv")
+usage_df <- read_csv("data/hpc/resource_usage/prewas_resource_usage.csv")
 colnames(usage_df)[3] <- "Dataset"
 for (i in 1:nrow(usage_df)) {
   for  (j in 1:nrow(project_key)) {
@@ -551,7 +551,7 @@ dev.off()
 
 
 
-sink("data/local/numbers_for_paper.txt")
+sink("data/local/table/numbers_for_paper.txt")
 'Number of datasets:'
 nrow(variant_summary)
 'Number of species:'
