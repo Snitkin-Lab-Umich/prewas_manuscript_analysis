@@ -15,39 +15,36 @@ Efm_size <- 2900000
 Efs_size <- 2900000
 Ece_size <- 5310000
 
-project_df <- as.data.frame(matrix(NA, nrow = 16, ncol = 4))
+project_df <- as.data.frame(matrix(NA, nrow = 9, ncol = 4))
 colnames(project_df) <- c("projects", "species", "species_size", "row")
 
 project_df$projects <-
-  c("Cd_1", "Cd_2", "Cd_3", "Cd_4",
-    "Kp_1", "Kp_2",
-    "Sa_1", "Sa_2", "Sa_3",
-    "Efm_1", "Efs_1", "Sm_1", "Lp_1", "Lc_1", "Ec_1", "Ece_1")
+  c("Cd_3", "Cd_4",
+    "Kp_1", 
+    "Sa_1", "Sa_2",
+    "Efm_1", 
+    "Efs_1",
+    "Sm_1",
+    "Lc_1")
 project_df$species_size <-
-  c(rep(Cd_size, 4),
-    rep(Kp_size, 2),
-    rep(Sa_size, 3),
+  c(rep(Cd_size, 2),
+    rep(Kp_size, 1),
+    rep(Sa_size, 2),
     Efm_size,
     Efs_size,
     Sm_size,
-    Lp_size,
-    Lc_size,
-    Ec_size,
-    Ece_size)
+    Lc_size)
 project_df$species <-
-  c(rep("C. difficile", 4),
-    rep("K. pneumoniae", 2),
-    rep("S. aureus", 3),
+  c(rep("C. difficile", 2),
+    rep("K. pneumoniae", 1),
+    rep("S. aureus", 2),
     "E. faecium",
     "E. faecalis",
     "S. maltophilia",
-    "L. pneumophila",
-    "L. crispatus",
-    "E. coli",
-    "E. cloacae")
+    "L. crispatus")
 project_df$row <- 1:nrow(project_df)
 
-cleaned_data_dir <- "../../2019-11-20_clean_data/data/"
+snp_mat_dir <- "data/snp_matrices_and_parsed_data/"
 
 data_col_names <- c("Project",
                     "Species",
@@ -222,7 +219,7 @@ load_project_snpmat <- function(project_name){
   print(project_name)
   mat <- NULL
   temp_file_name <-
-    paste0(cleaned_data_dir, project_name, "_allele_mat_unsplit_no_ig.tsv")
+    paste0(snp_mat_dir, project_name, "_allele_mat_unsplit_no_ig.tsv")
   if (file.exists(temp_file_name)) {
     mat <- read_snpmat(temp_file_name)
   }
