@@ -1,0 +1,1 @@
+The lib.R file contains the functions to run scripts such as count_convergence_events_for_cdif_st1.R. Each project had its own equivalent script to generate the files saved in data/hpc/convergence/

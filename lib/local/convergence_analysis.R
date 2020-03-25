@@ -1,5 +1,11 @@
+# This script takes in summary data generated on the HPC regarding the number
+# of variant transitions  (WT -> Variant or Variant -> WT) for both biallelic 
+# and multiallelic sites for each data set. Given this data, it computes the
+# number of times convergence occurs. Data analyzed in this script are used for
+# Figure S2D. 
+
 data_dir <- "data/convergence/"
-source("lib/multiallelic_lib.R")
+source("lib/local/multiallelic_lib.R")
 bi_mat <- "_biallelic_transition_matrix.csv"
 multi_mat <- "_multiallelic_transition_matrix.csv"
 mat <- "_transition_matrix.csv"
