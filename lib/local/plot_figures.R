@@ -355,7 +355,7 @@ save_as_pdf_eps_png("Figure_3B_ancestral_reconstruction",
 
 # Read in Overlap Data ---------------------------------------------------------
 overlap_func_impact_long <- read_tsv("data/local/overlap_diversity_long.tsv")
-overlap_snpeff_summary <- read_tsv("data/local/overlap_snpeff_sumary.tsv")
+overlap_snpeff_summary <- read_tsv("data/local/overlap_snpeff_summary.tsv")
 overlap_heatmap <- read_tsv("data/local/overlap_heatmap.tsv")
 overlap_stats <- read_tsv("data/local/overlap_stats.tsv")
 

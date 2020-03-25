@@ -1,9 +1,9 @@
 # Goal: find all of the SNPs in overlapping positions per dataset.
 library(tidyverse)
-source("lib/multiallelic_lib.R")
+source("lib/local/multiallelic_lib.R")
 
 drop_projects <- c("Kp_2", "Cd_1", "Cd_2")
-variant_summary <- read_tsv("data/multiallelic_summary.tsv")
+variant_summary <- read_tsv("data/local/multiallelic/multiallelic_summary.tsv")
 
 variant_summary <- variant_summary %>%
   select(Project, Species, Dataset, hex_color, color,
@@ -11,7 +11,7 @@ variant_summary <- variant_summary %>%
 
 # Reformat data for plotting ---------------------------------------------------
 overlap_snpeff_summary <-
-  read_tsv(file = "../data/snpeff_overlap_summary.tsv")
+  read_tsv(file = "data/local/overlap/snpeff_overlap_summary.tsv")
 overlap_snpeff_htmp_data <-
   overlap_snpeff_summary %>%
   filter(!Project %in% drop_projects) %>%
@@ -48,19 +48,11 @@ overlap_variant_summary <-
             by = c("Project"))
 overlap_variant_summary <- overlap_variant_summary %>% filter(!is.na(Dataset))
 
-# This is what I had been plotting and I think this is wrong!
-# new version below
-# overlap_variant_summary <- overlap_variant_summary %>%
-#   mutate(Baseline = NumOverlapSites / NumVariantSite,
-#          Low = sum(NumHighLow, NumModerateLow, NumLowLow, na.rm = TRUE) / NumVariantLow,
-#          Moderate = sum(NumHighModerate, NumModerateModerate, NumModerateLow, na.rm = TRUE) / NumVariantModerate,
-#          High = sum(NumHighHigh, NumHighLow, NumHighModerate, na.rm = TRUE) / NumVariantHigh,
-#          LowDiversity = MaxSNPDist <  diversity_cutoff)
-
 overlap_variant_summary <- overlap_variant_summary %>%
   mutate(# Baseline = NumOverlapSites / NumVariantSite,
          Low = (NumHighLow + NumModerateLow + NumLowLow) / NumOverlapSites,
-         Moderate = (NumHighModerate + NumModerateModerate + NumModerateLow) / NumOverlapSites,
+         Moderate = (NumHighModerate + NumModerateModerate + NumModerateLow) / 
+           NumOverlapSites,
          High = (NumHighHigh + NumHighLow + NumHighModerate) / NumOverlapSites)
 
 melted_overlap_variant_summary <- melt(overlap_variant_summary,
@@ -74,12 +66,13 @@ melted_overlap_variant_summary <- melted_overlap_variant_summary %>%
   filter(!is.na(Project))
 
 bad_ones <- melted_overlap_variant_summary %>% filter(is.infinite(value))
-melted_overlap_both_variant <- melted_overlap_variant_summary %>% filter(!is.infinite(value))
+melted_overlap_both_variant <-
+  melted_overlap_variant_summary %>% filter(!is.infinite(value))
 
 overlap_snpeff_htmp <- rownames_to_column(as.data.frame(overlap_snpeff_htmp),
                                           var = "functional_impact")
 
-write_tsv(melted_overlap_both_variant, "data/overlap_diversity_long.tsv")
-write_tsv(overlap_snpeff_summary, "data/overlap_snpeff_sumary.tsv")
-write_tsv(overlap_snpeff_htmp, "data/overlap_heatmap.tsv")
+write_tsv(melted_overlap_both_variant, "data/local/overlap/overlap_diversity_long.tsv")
+write_tsv(overlap_snpeff_summary, "data/local/overlap/overlap_snpeff_summary.tsv")
+write_tsv(overlap_snpeff_htmp, "data/local/overlap/overlap_heatmap.tsv")
 
