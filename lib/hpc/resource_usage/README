@@ -1,0 +1,1 @@
+This directory contains the wrapper function used to call prewas in the various ways necessary for the resource usage plot. HPC-specific commands were used to track time and memory usage for each run. Data were collected and plotted. 
