@@ -87,7 +87,7 @@ for (i in 1:num_project) {
 }
 
 write_tsv(x = summary,
-          path = "data/snpeff_overlap_summary.tsv", 
+          path = "data/local/overlap/snpeff_overlap_summary.tsv",
           col_names = TRUE)
 
 
@@ -110,5 +110,5 @@ for (i in 1:num_project) {
 
 write_tsv(x = overlap_stats, 
           col_names = TRUE, 
-          path = "data/overlap_stats.tsv")
+          path = "data/local/overlap/overlap_stats.tsv")
 
