@@ -9,8 +9,8 @@ library(gridExtra)
 source("lib/multiallelic_lib.R")
 
 # Color palettes and project names ---------------------------------------------
-color_key <- read_tsv("data/plot_colors.tsv")
-project_key <- read_tsv("data/project_names_and_colors.tsv")
+color_key <- read_tsv("data/keys/plot_colors.tsv")
+project_key <- read_tsv("data/keys/project_names_and_colors.tsv")
 palette <-  project_key$hex_color
 names(palette) <- project_key$Dataset
 
@@ -41,16 +41,16 @@ save_as_pdf_eps_png <- function(file_prefix, width_size, height_size){
 }
 
 # Read in Multiallelic Data ----------------------------------------------------
-variant_summary <- read_tsv("data/multiallelic_summary.tsv")
-snp_mat_summary <- read_tsv("data/multiallelic_summary_subsampled.tsv")
-snp_mat_grouped <- read_tsv("data/multiallelic_summary_by_project.tsv")
+variant_summary <- read_tsv("data/local/multiallelic_summary.tsv")
+snp_mat_summary <- read_tsv("data/local/multiallelic_summary_subsampled.tsv")
+snp_mat_grouped <- read_tsv("data/local/multiallelic_summary_by_project.tsv")
 
 
-functional_impact_long <- read_tsv("data/SNP_diversity_long.tsv")
-functional_variant_summary <- read_tsv(file = "data/snpeff_multiallelic_summary.tsv")
-tri_functional_summary <- read_tsv(file = "data/snpeff_triallelic_summary.tsv")
-tri_functional_heatmap <- read.csv(file = "data/triallelic_heatmap.csv", row.names = 1)
-convergence <- read_tsv(file = "data/convergence.tsv")
+functional_impact_long <- read_tsv("data/local/SNP_diversity_long.tsv")
+functional_variant_summary <- read_tsv(file = "data/local/snpeff_multiallelic_summary.tsv")
+tri_functional_summary <- read_tsv(file = "data/local/snpeff_triallelic_summary.tsv")
+tri_functional_heatmap <- read.csv(file = "data/local/triallelic_heatmap.csv", row.names = 1)
+convergence <- read_tsv(file = "data/local/convergence.tsv")
 
 # Filter out datasets to exclude:
 variant_summary <- variant_summary %>% filter(!Project %in% drop_projects)
@@ -278,9 +278,9 @@ save_as_pdf_eps_png("Figure_S2D_convergence",
                     default_height)
 
 # Read in Reference Allele Data ------------------------------------------------
-frac_mismatch = read.table('data/frac_mismatch.tsv')
-num_mismatch = read.table('data/num_mismatch.tsv')
-anc_probs = read.table('data/anc_probs.tsv')
+frac_mismatch = read.table('data/local/frac_mismatch.tsv')
+num_mismatch = read.table('data/local/num_mismatch.tsv')
+anc_probs = read.table('data/local/anc_probs.tsv')
 
 anc_probs <- anc_probs %>% filter(!dat %in% drop_projects)
 
@@ -354,10 +354,10 @@ save_as_pdf_eps_png("Figure_3B_ancestral_reconstruction",
                     default_height)
 
 # Read in Overlap Data ---------------------------------------------------------
-overlap_func_impact_long <- read_tsv("data/overlap_diversity_long.tsv")
-overlap_snpeff_summary <- read_tsv("data/overlap_snpeff_sumary.tsv")
-overlap_heatmap <- read_tsv("data/overlap_heatmap.tsv")
-overlap_stats <- read_tsv("data/overlap_stats.tsv")
+overlap_func_impact_long <- read_tsv("data/local/overlap_diversity_long.tsv")
+overlap_snpeff_summary <- read_tsv("data/local/overlap_snpeff_sumary.tsv")
+overlap_heatmap <- read_tsv("data/local/overlap_heatmap.tsv")
+overlap_stats <- read_tsv("data/local/overlap_stats.tsv")
 
 overlap_stats <- overlap_stats %>% filter(!Project %in% drop_projects)
 overlap_func_impact_long <- overlap_func_impact_long %>%
@@ -406,7 +406,7 @@ save_as_pdf_eps_png("Figure_4A_overlap_functional_impact",
 
 # Figure S3 Heritability Estimate Differences
 cols = project_key 
-her_ests = read.csv('data/her_ests.csv', header = F, stringsAsFactors = F)
+her_ests = read.csv('data/hpc/her_ests.csv', header = F, stringsAsFactors = F)
 colors = cols$hex_color
 names(colors) = cols$Project
 proj_name = cols$Dataset
@@ -485,7 +485,7 @@ save_as_pdf_eps_png("Figure_S5B_overlap_gene_count",
                     default_height)
 
 ## S6 Resource Usage -----------------------------------------------------------
-usage_df <- read_csv("data/prewas_resource_usage.csv")
+usage_df <- read_csv("data/hpc/prewas_resource_usage.csv")
 colnames(usage_df)[3] <- "Dataset"
 for (i in 1:nrow(usage_df)) {
   for  (j in 1:nrow(project_key)) {
@@ -553,7 +553,7 @@ dev.off()
 
 
 
-sink("data/numbers_for_paper.txt")
+sink("data/local/numbers_for_paper.txt")
 'Number of datasets:'
 nrow(variant_summary)
 'Number of species:'
