@@ -68,16 +68,7 @@ data_col_names <- c("Project",
                     "NumBiallelicOverlappingGene")
 
 # Functions --------------------------------------------------------------------
-read_snpmat <- function(path){
-  mat <- read.table(path,
-                    sep = "\t",
-                    stringsAsFactors = FALSE,
-                    header = TRUE,
-                    row.names = 1)
-  print("read in snpmat")
-  return(mat)
-}
-
+# This function only works for SNP matrices
 keep_only_variant_sites <- function(mat){
   rows_to_keep <- apply(mat, 1, function(row){
     sum(unique(row) %in% c("A", "T", "G", "C"))
@@ -105,6 +96,7 @@ keep_only_variant_sites <- function(mat){
   return(results)
 }
 
+# Calculate  pairwise SNP distance for SNP matrix
 calc_snp_dist <- function(mat){
   snp_dist_mat <- apply(mat, 2, function(col){
     colSums(col != mat, na.rm = TRUE)
@@ -112,6 +104,34 @@ calc_snp_dist <- function(mat){
   print("calculated pairwise snp dist")
   snp_dist <- snp_dist_mat[lower.tri(snp_dist_mat)]
   return(snp_dist)
+}  
+generate_storage_df <- function(){
+  data <- as_tibble(matrix(NA, ncol = length(data_col_names), nrow = 15))
+  colnames(data) <- data_col_names
+  return(data)
+}
+
+generate_single_df <- function(){
+  data <- as_tibble(matrix(NA, ncol = length(data_col_names), nrow = 1))
+  colnames(data) <- data_col_names
+  return(data)
+}
+
+generate_nrow_df <- function(num_row){
+  data <- as_tibble(matrix(NA, ncol = length(data_col_names), nrow = num_row))
+  colnames(data) <- data_col_names
+  return(data)
+}
+
+# Functions specific to Snitkin Lab made SNP matrices --------------------------
+read_snpmat <- function(path){
+  mat <- read.table(path,
+                    sep = "\t",
+                    stringsAsFactors = FALSE,
+                    header = TRUE,
+                    row.names = 1)
+  print("read in snpmat")
+  return(mat)
 }
 
 count_overlapping_genes <- function(mat){
@@ -191,24 +211,6 @@ fill_in_data <- function(data_mat,
   
   print("Done")
   return(data_mat)
-}
-
-generate_storage_df <- function(){
-  data <- as_tibble(matrix(NA, ncol = length(data_col_names), nrow = 15))
-  colnames(data) <- data_col_names
-  return(data)
-}
-
-generate_single_df <- function(){
-  data <- as_tibble(matrix(NA, ncol = length(data_col_names), nrow = 1))
-  colnames(data) <- data_col_names
-  return(data)
-}
-
-generate_nrow_df <- function(num_row){
-  data <- as_tibble(matrix(NA, ncol = length(data_col_names), nrow = num_row))
-  colnames(data) <- data_col_names
-  return(data)
 }
 
 load_project_snpmat <- function(project_name){
