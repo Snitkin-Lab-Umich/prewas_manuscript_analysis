@@ -1,3 +1,5 @@
+Users must gunzip the zipped files in order to run the scripts. To do so use the command: gunzip --keep *.gz
+
 Data in this directory was originally generated in /nfs/esnitkin/Project_Prep_GWAS_Variants/Analysis/Prep_GWAS_SNPs/2019-11-20_clean_data/data
 
 Data was made by running clean_PROJECT_ID.R (specific for each project). These cleaning scripts renamed samples so that tree tips and snpmat names matched; they also removed low quality samples. The cleaning scripts were originally located in /nfs/esnitkin/Project_Prep_GWAS_Variants/Analysis/Prep_GWAS_SNPs/2019-11-20_clean_data/lib.
