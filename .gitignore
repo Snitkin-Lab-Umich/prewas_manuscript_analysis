@@ -7,3 +7,5 @@
 ._*
 *png
 .DS_Store
+data/snp_matrices_and_parsed_data/*_allele_mat_unsplit_no_ig.tsv
+data/snp_matrices_and_parsed_data/*_annot_split_no_overlap_no_ig.tsv
