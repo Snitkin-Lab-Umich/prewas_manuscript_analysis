@@ -1,0 +1,11 @@
+Project	Species	NumIsolates	AvgGenomeBP	TotalBP	NumVariantSite	NumBiallelicSite	NumTriallelicSite	NumQuadallelicSite	NumMultiallelicSite	NumVariantLow	NumBiallelicLow	NumMultiallelicLow	NumVariantModerate	NumBiallelicModerate	NumMultiallelicModerate	NumVariantHigh	NumBiallelicHigh	NumMultiallelicHigh	MeanSNPDist	MedianSNPDist	MaxSNPDist	NumBiallelicOverlappingGene
+Efm_1	E. faecium	2	2900000	5800000	3994	3994	0	0	0	3163	3163	0	838	838	0	11	11	0	3994	3994	3994	1
+Efm_1	E. faecium	2	2900000	5800000	4	4	0	0	0	3	3	0	0	0	0	1	1	0	4	4	4	0
+Efm_1	E. faecium	2	2900000	5800000	3382	3382	0	0	0	2702	2702	0	677	677	0	12	12	0	3382	3382	3382	2
+Efm_1	E. faecium	2	2900000	5800000	4737	4737	0	0	0	3762	3762	0	976	976	0	16	16	0	4737	4737	4737	2
+Efm_1	E. faecium	2	2900000	5800000	184	184	0	0	0	121	121	0	64	64	0	1	1	0	184	184	184	0
+Efm_1	E. faecium	2	2900000	5800000	3427	3427	0	0	0	2643	2643	0	779	779	0	15	15	0	3427	3427	3427	1
+Efm_1	E. faecium	2	2900000	5800000	4027	4027	0	0	0	3106	3106	0	911	911	0	17	17	0	4027	4027	4027	3
+Efm_1	E. faecium	2	2900000	5800000	4323	4323	0	0	0	3379	3379	0	943	943	0	15	15	0	4323	4323	4323	1
+Efm_1	E. faecium	2	2900000	5800000	27	27	0	0	0	10	10	0	17	17	0	1	1	0	27	27	27	0
+Efm_1	E. faecium	2	2900000	5800000	4524	4524	0	0	0	3366	3366	0	1150	1150	0	22	22	0	4524	4524	4524	1

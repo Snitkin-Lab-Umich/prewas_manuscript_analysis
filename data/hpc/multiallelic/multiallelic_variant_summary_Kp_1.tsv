@@ -1,0 +1,2 @@
+Project	Species	NumIsolates	AvgGenomeBP	TotalBP	NumVariantSite	NumBiallelicSite	NumTriallelicSite	NumQuadallelicSite	NumMultiallelicSite	NumVariantLow	NumBiallelicLow	NumMultiallelicLow	NumVariantModerate	NumBiallelicModerate	NumMultiallelicModerate	NumVariantHigh	NumBiallelicHigh	NumMultiallelicHigh	MeanSNPDist	MedianSNPDist	MaxSNPDist	NumBiallelicOverlappingGene
+Kp_1	K. pneumoniae	453	5400000	2446200000	88954	88034	907	13	920	67984	67169	815	20527	20362	165	376	373	3	3825.3720330539763	44	27209	76

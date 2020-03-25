@@ -4,7 +4,7 @@
 # number of times convergence occurs. Data analyzed in this script are used for
 # Figure S2D. 
 
-data_dir <- "data/convergence/"
+data_dir <- "data/local/convergence/"
 source("lib/local/multiallelic_lib.R")
 bi_mat <- "_biallelic_transition_matrix.csv"
 multi_mat <- "_multiallelic_transition_matrix.csv"
@@ -92,7 +92,7 @@ summary$Num_Convergence_Events_8_bin <-
   as.factor(summary$Num_Convergence_Events_8_bin)
 summary <- summary %>% mutate("Locus Type" = SNP_Type)
 
-write_tsv(summary, "../data/convergence.tsv")
+write_tsv(summary, "data/local/convergence/convergence.tsv")
 
 
 multi_dist <- summary %>% 
@@ -132,4 +132,4 @@ results_mat[1, 1] <- as.character(round(ks_results$statistic, 3))
 results_mat[2, 1] <- as.character(round(ks_results$p.value, 10))
 results_mat[3, 1] <- as.character(round(subset_sig_percent, 3))
 
-write.csv(results_mat, file = "data/convergence_ks_test.csv")
+write.csv(results_mat, file = "data/local/convergence/convergence_ks_test.csv")

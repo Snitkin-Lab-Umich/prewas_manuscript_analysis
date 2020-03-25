@@ -1,0 +1,2 @@
+Project	Species	NumIsolates	AvgGenomeBP	TotalBP	NumVariantSite	NumBiallelicSite	NumTriallelicSite	NumQuadallelicSite	NumMultiallelicSite	NumVariantLow	NumBiallelicLow	NumMultiallelicLow	NumVariantModerate	NumBiallelicModerate	NumMultiallelicModerate	NumVariantHigh	NumBiallelicHigh	NumMultiallelicHigh	MeanSNPDist	MedianSNPDist	MaxSNPDist	NumBiallelicOverlappingGene
+Sa_1	S. aureus	150	2800000	420000000	38142	37846	295	1	296	22685	22475	210	14313	14209	104	364	356	8	5194.964295302014	479	14627	74

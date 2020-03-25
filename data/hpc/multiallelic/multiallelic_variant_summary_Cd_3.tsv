@@ -1,0 +1,2 @@
+Project	Species	NumIsolates	AvgGenomeBP	TotalBP	NumVariantSite	NumBiallelicSite	NumTriallelicSite	NumQuadallelicSite	NumMultiallelicSite	NumVariantLow	NumBiallelicLow	NumMultiallelicLow	NumVariantModerate	NumBiallelicModerate	NumMultiallelicModerate	NumVariantHigh	NumBiallelicHigh	NumMultiallelicHigh	MeanSNPDist	MedianSNPDist	MaxSNPDist	NumBiallelicOverlappingGene
+Cd_3	C. difficile	107	4300000	460100000	144131	140604	3471	56	3527	98420	95547	2873	47305	46082	1223	531	511	20	18010.370481396578	16071	80084	11511
