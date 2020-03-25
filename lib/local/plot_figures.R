@@ -1,16 +1,13 @@
-# Note: Kp_2, Cd_1, and Cd_2 must be excluded
-drop_projects <- c("Kp_2", "Cd_1", "Cd_2")
-
 # Libraries --------------------------------------------------------------------
 library(magrittr)
 library(ggplot2)
 library(tidyverse)
 library(gridExtra)
-source("lib/multiallelic_lib.R")
+source("lib/local/multiallelic_lib.R")
 
 # Color palettes and project names ---------------------------------------------
-color_key <- read_tsv("data/keys/plot_colors.tsv")
-project_key <- read_tsv("data/keys/project_names_and_colors.tsv")
+color_key <- read_tsv("data/key/plot_colors.tsv")
+project_key <- read_tsv("data/key/project_names_and_colors.tsv")
 palette <-  project_key$hex_color
 names(palette) <- project_key$Dataset
 
@@ -41,18 +38,19 @@ save_as_pdf_eps_png <- function(file_prefix, width_size, height_size){
 }
 
 # Read in Multiallelic Data ----------------------------------------------------
-variant_summary <- read_tsv("data/local/multiallelic_summary.tsv")
-snp_mat_summary <- read_tsv("data/local/multiallelic_summary_subsampled.tsv")
-snp_mat_grouped <- read_tsv("data/local/multiallelic_summary_by_project.tsv")
+variant_summary <- read_tsv("data/local/multiallelic/multiallelic_summary.tsv")
+snp_mat_summary <- read_tsv("data/local/multiallelic/multiallelic_summary_subsampled.tsv")
+snp_mat_grouped <- read_tsv("data/local/multiallelic/multiallelic_summary_by_project.tsv")
 
 
-functional_impact_long <- read_tsv("data/local/SNP_diversity_long.tsv")
-functional_variant_summary <- read_tsv(file = "data/local/snpeff_multiallelic_summary.tsv")
-tri_functional_summary <- read_tsv(file = "data/local/snpeff_triallelic_summary.tsv")
-tri_functional_heatmap <- read.csv(file = "data/local/triallelic_heatmap.csv", row.names = 1)
-convergence <- read_tsv(file = "data/local/convergence.tsv")
+functional_impact_long <- read_tsv("data/local/multiallelic/SNP_diversity_long.tsv")
+functional_variant_summary <- read_tsv(file = "data/local/multiallelic/snpeff_multiallelic_summary.tsv")
+tri_functional_summary <- read_tsv(file = "data/local/multiallelic/snpeff_triallelic_summary.tsv")
+tri_functional_heatmap <- read.csv(file = "data/local/multiallelic/triallelic_heatmap.csv", row.names = 1)
+convergence <- read_tsv(file = "data/local/convergence/convergence.tsv")
 
 # Filter out datasets to exclude:
+drop_projects <- c("Kp_2", "Cd_1", "Cd_2")
 variant_summary <- variant_summary %>% filter(!Project %in% drop_projects)
 snp_mat_summary <- snp_mat_summary %>% filter(!Project %in% drop_projects)
 snp_mat_grouped <- snp_mat_grouped %>% filter(!Project %in% drop_projects)
