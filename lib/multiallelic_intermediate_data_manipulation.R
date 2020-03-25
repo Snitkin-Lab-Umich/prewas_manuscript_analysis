@@ -66,7 +66,7 @@ group_by_project <-
 group_by_project <- left_join(group_by_project, project_key, by = "Project")
 
 write_tsv(group_by_project,
-          path = "../data/multiallelic_summary_by_project.tsv")
+          path = "data/multiallelic_summary_by_project.tsv")
 
 # Multi to any variant ratio calculation ---------------------------------------
 variant_summary <- variant_summary %>%
@@ -81,8 +81,8 @@ variant_summary <- variant_summary %>%
 snp_mat_summary <- snp_mat_summary %>%
   mutate("Dataset Size (#)" = NumIsolates)
 snp_mat_summary <- left_join(snp_mat_summary, project_key)
-write_tsv(variant_summary, "../data/multiallelic_summary.tsv")
-write_tsv(snp_mat_summary, path = "../data/multiallelic_summary_subsampled.tsv")
+write_tsv(variant_summary, "data/multiallelic_summary.tsv")
+write_tsv(snp_mat_summary, path = "data/multiallelic_summary_subsampled.tsv")
 
 # Melt the variant summary
 melted_diversity_variant <- melted_variant_summary <-
@@ -90,7 +90,7 @@ melted_diversity_variant <- melted_variant_summary <-
        id.vars = 'Project',
        measure.vars = c('Baseline', 'Low', 'Moderate', 'High'))
 
-write_tsv(melted_diversity_variant, "../data/SNP_diversity_long.tsv")
+write_tsv(melted_diversity_variant, "data/SNP_diversity_long.tsv")
 
 # Calculate significance, functional impact by low vs hi diversity -------------
 t_test_results <- matrix(NA, nrow = 3, ncol = 2)
@@ -120,7 +120,7 @@ t_test_results <-
                      var = "functional_impact")
 
 write_tsv(t_test_results,
-          "../data/t_test_multiallelic.tsv")
+          "data/t_test_multiallelic.tsv")
 
 # Functional impact at multiallelic sites --------------------------------------
 for (i in 1:num_project) {
@@ -144,7 +144,7 @@ for (i in 1:num_project) {
     }
     write_tsv(x = multi_var_snpeff_annots_mat,
               col_names = TRUE,
-              path = paste0("../data/",
+              path = paste0("data/",
                             project_key$Project[i],
                             "_SNPEFF_annotation_for_multiallelic_sites.tsv"))
 
@@ -159,13 +159,13 @@ for (i in 1:num_project) {
     if (ncol(tri_var_snpeff_annots_mat) > 0)
     write_tsv(x = tri_var_snpeff_annots_mat,
               col_names = TRUE,
-              path = paste0("../data/",
+              path = paste0("data/",
                             project_key$Project[i],
                             "_SNPEFF_annotation_for_triallelic_sites.tsv"))
   }
 }
 
-data_dir <- "../data/"
+data_dir <- "data/"
 snpeff_summary <- as.data.frame(matrix(NA, ncol = 11, nrow = num_project))
 colnames(snpeff_summary) <- c("project",
                               "NumMultiallelicSites",
@@ -218,12 +218,12 @@ snpeff_summary <- snpeff_summary %>%
   mutate(percent_different = 100 * NumDifferentImpact / NumMultiallelicSites)
 colnames(snpeff_summary)[colnames(snpeff_summary) == "project"] <- "Project"
 write_tsv(x = snpeff_summary,
-          path = "../data/snpeff_multiallelic_summary.tsv",
+          path = "data/snpeff_multiallelic_summary.tsv",
           col_names = TRUE)
 
 # For the heatmap figure I'm trying to make, make a specific summary of the
 # triallelic data
-data_dir <- "../data/"
+data_dir <- "data/"
 
 tri_summary <- as.data.frame(matrix(NA, ncol = 11, nrow = num_project))
 colnames(tri_summary) <- c("project",
@@ -276,7 +276,7 @@ tri_summary <- tri_summary %>%
   mutate(percent_different = 100 * NumDifferentImpact / NumMultiallelicSites)
 colnames(tri_summary)[colnames(tri_summary) == "project"] <- "Project"
 write_tsv(x = tri_summary,
-          path = "../data/snpeff_triallelic_summary.tsv",
+          path = "data/snpeff_triallelic_summary.tsv",
           col_names = TRUE)
 
 # The lines related to drop_projects were added 2019-12-18 to make sure bad and/or not publicly available projects were removed prior to making summary heatmap
@@ -303,4 +303,4 @@ tri_htmp[1, 2] <- tri_htmp[2, 1] <- tri_htmp_data[2]
 tri_htmp[1, 3] <- tri_htmp[3, 1] <- tri_htmp_data[3]
 tri_htmp[2, 3] <- tri_htmp[3, 2] <- tri_htmp_data[5]
 
-write.csv(tri_htmp, file = "../data/triallelic_heatmap.csv")
+write.csv(tri_htmp, file = "data/triallelic_heatmap.csv")
