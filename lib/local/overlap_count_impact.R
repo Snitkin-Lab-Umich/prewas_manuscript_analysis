@@ -23,7 +23,7 @@ for (i in 1:num_project) {
     if (nrow(summary_snpeff_df) > 0) {
       write_tsv(x = summary_snpeff_df, 
                 col_names = TRUE, 
-                path = paste0("data/",
+                path = paste0("data/local/overlap/",
                               project_df$projects[i], 
                               "_SNPEFF_annotation_for_overlap_sites.tsv"))
     } else {
@@ -33,7 +33,7 @@ for (i in 1:num_project) {
 }
 
 # Summarize overlap info -------------------------------------------------------
-data_dir <- "data/"
+data_dir <- "data/local/overlap/"
 names <- c("Project", 
            "NumOverlapSites", 
            "NumIdenticalImpact", 
