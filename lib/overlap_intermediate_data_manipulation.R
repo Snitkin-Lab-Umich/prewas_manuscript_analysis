@@ -1,9 +1,9 @@
 # Goal: find all of the SNPs in overlapping positions per dataset.
 library(tidyverse)
-source("../../2019-12-04_analysis_with_sbat/lib/multiallelic_lib.R")
+source("lib/multiallelic_lib.R")
 
 drop_projects <- c("Kp_2", "Cd_1", "Cd_2")
-variant_summary <- read_tsv("../data/multiallelic_summary.tsv")
+variant_summary <- read_tsv("data/multiallelic_summary.tsv")
 
 variant_summary <- variant_summary %>%
   select(Project, Species, Dataset, hex_color, color,
@@ -79,7 +79,7 @@ melted_overlap_both_variant <- melted_overlap_variant_summary %>% filter(!is.inf
 overlap_snpeff_htmp <- rownames_to_column(as.data.frame(overlap_snpeff_htmp),
                                           var = "functional_impact")
 
-write_tsv(melted_overlap_both_variant, "../data/overlap_diversity_long.tsv")
-write_tsv(overlap_snpeff_summary, "../data/overlap_snpeff_sumary.tsv")
-write_tsv(overlap_snpeff_htmp, "../data/overlap_heatmap.tsv")
+write_tsv(melted_overlap_both_variant, "data/overlap_diversity_long.tsv")
+write_tsv(overlap_snpeff_summary, "data/overlap_snpeff_sumary.tsv")
+write_tsv(overlap_snpeff_htmp, "data/overlap_heatmap.tsv")
 
