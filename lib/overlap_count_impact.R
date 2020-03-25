@@ -1,13 +1,13 @@
 # Goal: find all of the SNPs in overlapping positions per dataset. 
 
 library(tidyverse)
-source("../../2019-12-04_analysis_with_sbat/lib/multiallelic_lib.R")
+source("lib/multiallelic_lib.R")
 num_project <- nrow(project_df)
 
 # Functions --------------------------------------------------------------------
 load_parsed_snpmat_by_project <- function(project_name) {
   mat <- NULL
-  fname <- paste0('../../2019-11-20_clean_data/data/', 
+  fname <- paste0('data/snp_matrices_and_parsed_data/', 
                   project_name,
                   '_parsed.RData')
   if (file.exists(fname)) {
@@ -37,7 +37,7 @@ for (i in 1:num_project) {
     if (nrow(summary_snpeff_df) > 0) {
       write_tsv(x = summary_snpeff_df, 
                 col_names = TRUE, 
-                path = paste0("../data/",
+                path = paste0("data/",
                               project_df$projects[i], 
                               "_SNPEFF_annotation_for_overlap_sites.tsv"))
     } else {
@@ -47,7 +47,7 @@ for (i in 1:num_project) {
 }
 
 # Summarize overlap info -------------------------------------------------------
-data_dir <- "../data/"
+data_dir <- "data/"
 names <- c("Project", 
            "NumOverlapSites", 
            "NumIdenticalImpact", 
@@ -101,7 +101,7 @@ for (i in 1:num_project) {
 }
 
 write_tsv(x = summary,
-          path = "../data/snpeff_overlap_summary.tsv", 
+          path = "data/snpeff_overlap_summary.tsv", 
           col_names = TRUE)
 
 
@@ -124,5 +124,5 @@ for (i in 1:num_project) {
 
 write_tsv(x = overlap_stats, 
           col_names = TRUE, 
-          path = "../data/overlap_stats.tsv")
+          path = "data/overlap_stats.tsv")
 
