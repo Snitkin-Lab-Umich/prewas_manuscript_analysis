@@ -7,13 +7,10 @@ one_row <- 1
 Cd_size <- 4300000
 Kp_size <- 5400000
 Sa_size <- 2800000
-Lp_size <- 3400000
 Lc_size <- 2040000
 Sm_size <- 4850000
-Ec_size <- 4600000
 Efm_size <- 2900000
 Efs_size <- 2900000
-Ece_size <- 5310000
 
 project_df <- as.data.frame(matrix(NA, nrow = 9, ncol = 4))
 colnames(project_df) <- c("projects", "species", "species_size", "row")
