@@ -1,7 +1,15 @@
+# This script finds the number and fraction of mismatches between genome reference, ancestral, and major allele variant matrices
+# Input: 
+#    data/snp_matrices_and_parsed_data/*annot*: Parsed annotations for each dataset
+# Output: 
+#    data/frac_mismatch.tsv: file with fraction of mismatches for each combination of reference alleles for each dataset
+#    data/num_mismatch.tsv: file with number of mismatches for each combination of reference alleles for each dataset
+#    data/anc_probs.tsv: file with information about ancestral reconstruction probabilities for each dataset 
+
 library(ggplot2)
 library(reshape2)
 
-files = list.files('../../2019-11-20_clean_data/data/',pattern = 'annot',full.names = T)
+files = list.files('data/snp_matrices_and_parsed_data/',pattern = 'annot',full.names = T)
 
 frac_mismatch = matrix(NA,nrow=length(files),ncol=3)
 colnames(frac_mismatch) = c('ref_maj','ref_anc','maj_anc')
@@ -48,11 +56,11 @@ for(f in files){
   
 }
 
-write.table(frac_mismatch,file = '../data/frac_mismatch.tsv',sep = '\t')
-write.table(num_mismatch,file = '../data/num_mismatch.tsv',sep = '\t')
+write.table(frac_mismatch,file = 'data/frac_mismatch.tsv',sep = '\t')
+write.table(num_mismatch,file = 'data/num_mismatch.tsv',sep = '\t')
 
 anc_probs = data.frame(anc_probs[2:nrow(anc_probs),])
-write.table(anc_probs,file = '../data/anc_probs.tsv',sep='\t')
+write.table(anc_probs,file = 'data/anc_probs.tsv',sep='\t')
 
 
 
