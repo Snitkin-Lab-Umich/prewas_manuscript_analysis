@@ -31,7 +31,8 @@ for (i in 1:num_projects) {
                                nrow(temp_bi_mat),
                                names(table(temp_bi_mat)[j]), 
                                unname(table(temp_bi_mat)[j]), 
-                               100 * (unname(table(temp_bi_mat)[j]) / nrow(temp_bi_mat))), 
+                               100 * (unname(table(temp_bi_mat)[j]) /
+                                        nrow(temp_bi_mat))), 
                              nrow = 1, 
                              ncol = num_columns)) 
       colnames(temp_summary) <- sum_col_names
@@ -45,7 +46,8 @@ for (i in 1:num_projects) {
                                nrow(temp_multi_mat),
                                names(table(temp_multi_mat)[k]), 
                                unname(table(temp_multi_mat)[k]), 
-                               100 * (unname(table(temp_multi_mat)[k]) / nrow(temp_multi_mat))), 
+                               100 * (unname(table(temp_multi_mat)[k]) /
+                                        nrow(temp_multi_mat))), 
                              nrow = 1, 
                              ncol = num_columns)) 
       colnames(temp_summary) <- sum_col_names
@@ -55,21 +57,33 @@ for (i in 1:num_projects) {
 }
 
 summary <- summary %>% 
-  mutate(Num_Convergence_Events = (as.numeric(as.character(Num_Times_SNP_Arises)) - 1), 
+  mutate(Num_Convergence_Events = 
+           (as.numeric(as.character(Num_Times_SNP_Arises)) - 1), 
          Num_Convergence_Events_8_bin = Num_Convergence_Events)
 
-summary$Num_Convergence_Events_8_bin[summary$Num_Convergence_Events_8_bin > 7] <- NA
-summary$relative_frequency <- as.numeric(as.character(summary$relative_frequency))
-summary$Num_Times_SNP_Arises <- as.numeric(as.character(summary$Num_Times_SNP_Arises))
-summary <- summary %>% mutate(Num_Convergence_Events = Num_Times_SNP_Arises - 1) 
-summary <- summary %>% mutate(Num_Convergence_Events_8_bin = Num_Convergence_Events)
-summary$Num_Convergence_Events_8_bin[summary$Num_Convergence_Events_8_bin > 7] <- 8
-summary$Num_Convergence_Events_8_bin <- as.character(summary$Num_Convergence_Events_8_bin)
-summary$Num_Convergence_Events_8_bin[summary$Num_Convergence_Events_8_bin == "8"] <- ">7"
-summary$Num_Convergence_Events_8_bin <- as.character(summary$Num_Convergence_Events_8_bin)
-summary$Num_Convergence_Events_8_bin[is.na(summary$Num_Convergence_Events_8_bin)] <- ">7"
+summary$Num_Convergence_Events_8_bin[
+  summary$Num_Convergence_Events_8_bin > 7] <- NA
+summary$relative_frequency <-
+  as.numeric(as.character(summary$relative_frequency))
+summary$Num_Times_SNP_Arises <- 
+  as.numeric(as.character(summary$Num_Times_SNP_Arises))
+summary <- 
+  summary %>% mutate(Num_Convergence_Events = Num_Times_SNP_Arises - 1) 
+summary <- 
+  summary %>% mutate(Num_Convergence_Events_8_bin = Num_Convergence_Events)
+summary$Num_Convergence_Events_8_bin[
+  summary$Num_Convergence_Events_8_bin > 7] <- 8
+summary$Num_Convergence_Events_8_bin <-
+  as.character(summary$Num_Convergence_Events_8_bin)
+summary$Num_Convergence_Events_8_bin[
+  summary$Num_Convergence_Events_8_bin == "8"] <- ">7"
+summary$Num_Convergence_Events_8_bin <-
+  as.character(summary$Num_Convergence_Events_8_bin)
+summary$Num_Convergence_Events_8_bin[
+  is.na(summary$Num_Convergence_Events_8_bin)] <- ">7"
 
-summary$Num_Convergence_Events_8_bin <- as.factor(summary$Num_Convergence_Events_8_bin)
+summary$Num_Convergence_Events_8_bin <-
+  as.factor(summary$Num_Convergence_Events_8_bin)
 summary <- summary %>% mutate("Locus Type" = SNP_Type)
 
 write_tsv(summary, "../data/convergence.tsv")
@@ -112,4 +126,4 @@ results_mat[1, 1] <- as.character(round(ks_results$statistic, 3))
 results_mat[2, 1] <- as.character(round(ks_results$p.value, 10))
 results_mat[3, 1] <- as.character(round(subset_sig_percent, 3))
 
-write.csv(results_mat, file = "../data/convergence_ks_test.csv")
+write.csv(results_mat, file = "data/convergence_ks_test.csv")
