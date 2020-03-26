@@ -1,10 +1,10 @@
-Project	Dataset	hex_color	color
-Cd_3	C. difficile #3	#42d4f4	cyan
-Cd_4	C. difficile #4	#4363d8	blue
-Efm_1	E. faecium #1	#9A6324	brown
-Efs_1	E. faecalis #1	#bfef45	lime
-Kp_1	K. pneumoniae #1	#911eb4	purple
-Lc_1	L. crispatus #1	#f032e6	magenta
+Project	Dataset	hex_color	color 
+Cd_3	C. difficile #1	#42d4f4	cyan
+Cd_4	C. difficile #2	#4363d8	blue
+Efm_1	E. faecium	#9A6324	brown
+Efs_1	E. faecalis	#bfef45	lime
+Kp_1	K. pneumoniae	#911eb4	purple
+Lc_1	L. crispatus	#f032e6	magenta
 Sa_1	S. aureus #1	#e6194B	red
 Sa_2	S. aureus #2	#fabebe	pink
-Sm_1	S. maltophilia #1	#aaffc3	mint
+Sm_1	S. maltophilia	#aaffc3	mint
