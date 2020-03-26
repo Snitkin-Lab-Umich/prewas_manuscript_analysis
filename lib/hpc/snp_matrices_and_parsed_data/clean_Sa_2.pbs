@@ -1,0 +1,30 @@
+#!/bin/sh
+####  PBS preamble
+
+#PBS -N clean_Sa_2
+
+# User info
+#PBS -M zenalapp@umich.edu
+#PBS -m abe
+
+# Change the number of cores (ppn=1), amount of memory, and walltime:
+#PBS -l nodes=1:ppn=12,mem=47gb,walltime=02:00:00:00
+#PBS -j oe
+#PBS -V
+
+#PBS -A esnitkin_flux
+#PBS -q flux
+#PBS -l qos=flux
+
+####  End PBS preamble
+
+#  Show list of CPUs you ran on, if you're running under PBS
+if [ -n "$PBS_NODEFILE" ]; then cat $PBS_NODEFILE; fi
+
+#  Change to the directory you submitted from
+cd $PBS_O_WORKDIR
+#Load modules
+module load R/3.5.0 r-biomed-libs/3.5.0
+
+#  Put your job commands here:
+Rscript ../lib/clean_Sa_2.R
