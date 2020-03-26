@@ -18,7 +18,7 @@ The `data` direcotry contains three subdirectories:
 * `local` 
 * `key`
 
-`data/hpc` contains data we generated using our high performance computing cluster (hpc). There are scripts available so that you could adapt them for your computer system, but they are slow and/or computationally intensive analyses.
+`data/hpc` contains data we generated using our high performance computing cluster (hpc). There are scripts available so that you could adapt them for your computer system, but they are slow and/or computationally intensive analyses. This directory contains some zipped files (.gz) that need to be unzipped for scripts in `lib/local` to run without error.
 
 `data/local` contains the data the can be generated quickly on a desktop computer in R using the scripts in `lib/local` starting from data in `data/hpc` and `data/key`
 
