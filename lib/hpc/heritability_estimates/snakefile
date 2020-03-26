@@ -1,0 +1,52 @@
+# snakefile to get simulated phenotypes and shared variant kinship matrices
+
+with open('data/datasets.csv', 'r') as f:
+    datasets = f.read().splitlines()
+
+with open('data/dataset_names.csv', 'r') as f:
+    dataset_names = f.read().splitlines()
+
+rule all:
+  input:
+    expand('data/{dat}_phenotype.csv', dat=datasets),
+    expand('data/{dat}_shared_anc_multi.csv',dat=dataset_names),
+    expand('data/{dat}_shared_maj_multi.csv',dat=dataset_names),
+    expand('data/{dat}_shared_ref_multi.csv',dat=dataset_names)
+
+rule get_simulated_phenotypes:
+  input:
+    '../2020-03-13_prewas_resource_usage/data/{dat}_1_cores.Rdata'
+  output:
+    'data/{dat}_phenotype.csv',
+    'data/{dat}_pw_dists_multi.csv',
+    'data/{dat}_pw_dists_no_multi.csv'
+  script:
+    'lib/get_simulated_phenotypes.R'
+
+rule get_shared_variants:
+  input:
+    '../2019-11-20_clean_data/data/{dat}_parsed.RData',
+    'data/{dat}_prewas_output_with_ancestral_reconstruction_given_tree_phenotype.csv'
+  output:
+    'data/{dat}_shared_anc_multi.csv',
+    'data/{dat}_shared_maj_multi.csv',
+    'data/{dat}_shared_ref_multi.csv',
+    'data/{dat}_shared_anc_nomulti.csv',
+    'data/{dat}_shared_maj_nomulti.csv',
+    'data/{dat}_shared_ref_nomulti.csv'
+  script:
+    'lib/get_shared_variants.R'
+
+rule run_limix:
+  input:
+    'data/{dat}_phenotype.csv',
+    'data/{dat}_shared_anc_multi.csv',
+    'data/{dat}_shared_maj_multi.csv',
+    'data/{dat}_shared_ref_multi.csv',
+    'data/{dat}_shared_anc_nomulti.csv',
+    'data/{dat}_shared_maj_nomulti.csv',
+    'data/{dat}_shared_ref_nomulti.csv'
+  output:
+    'data/her_ests_shared.csv'
+  script:
+    'lib/limix.py'

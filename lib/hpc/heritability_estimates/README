@@ -1,0 +1,4 @@
+We used the snakefile present in this directory to: 
+1) Simulate phenotypes on trees using the trees in data/hpc/trees.
+2) Generate kinship (i.e. shared variant) matrices.
+3) Calculate heritability estimates using limix.
