@@ -1,1 +1,3 @@
-The lib.R file contains the functions to run scripts such as count_convergence_events_for_cdif_st1.R. Each project had its own equivalent script to generate the files saved in data/hpc/convergence/
+These scripts were originated on the Snitkin lab server at /nfs/esnitkin/Project_Prep_GWAS_Variants/Analysis/Prep_GWAS_SNPs/2020-03-25_count_converge_for_gl/lib.
+The count_convergent_events_lib.R file contains the functions to run scripts such as count_convergence_events_for_Sa_1.R. Each project has its own equivalent script to generate the files saved in data/hpc/convergence/. 
+These scripts help prepare the data for Figure S2D. 
