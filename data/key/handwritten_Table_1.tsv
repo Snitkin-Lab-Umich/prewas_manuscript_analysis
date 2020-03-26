@@ -1,10 +1,10 @@
 Name	Bioproject	Reference_genome_biosample	Paper	Dataset_description	Pairwise SNP Distance (Max? Mean?)	Samples (Count)	Multiallelic Sites (Count)	SNPs in overlapping genes (Count)
-C. difficile #3	PRJNA594943	SAMEA1705932		Clinical infection isolates				
-C. difficile #4	PRJNA561087	SAMEA1705932		Clinical infection isolates				
-E. faecium #1	PRJNA435617	SAMN10039001		Healthcare-associated colonization isolates				
-E. faecalis #1	PRJNA435617	SAMN10039299		Healthcare-associated colonization isolates				
-K. pneumoniae #1	PRJNA415194	SAMN01057611		Healthcare-associated clinical isolates				
-L. crispatus #1	PRJNA547620, PRJNA50051, PRJNA50173, PRJNA50057, PRJNA50067, PRJNA50165, PRJNA50167, PRJNA50053, PRJNA52107, PRJNA52105, PRJNA222257, PRJNA272101, PRJEB8104, PRJNA316969, PRJNA379934, PRJEB22112	SAMEA2272191		Publicly available genomes				
+C. difficile #1	PRJNA594943	SAMEA1705932		Clinical infection isolates				
+C. difficile #2	PRJNA561087	SAMEA1705932		Clinical infection isolates				
+E. faecium	PRJNA435617	SAMN10039001		Healthcare-associated colonization isolates				
+E. faecalis	PRJNA435617	SAMN10039299		Healthcare-associated colonization isolates				
+K. pneumoniae	PRJNA415194	SAMN01057611		Healthcare-associated clinical isolates				
+L. crispatus	PRJNA547620, PRJNA50051, PRJNA50173, PRJNA50057, PRJNA50067, PRJNA50165, PRJNA50167, PRJNA50053, PRJNA52107, PRJNA52105, PRJNA222257, PRJNA272101, PRJEB8104, PRJNA316969, PRJNA379934, PRJEB22112	SAMEA2272191		Publicly available genomes				
 S. aureus #1	PRJNA530184	SAMN00253845		MRSA jail colonization isolates				
 S. aureus #2	PRJNA435617	SAMN10038895		Healthcare-associated colonization isolates				
-S. maltophilia #1	PRJDB3841, PRJNA267549, PRJNA231221, PRJNA164599, PRJNA380601, PRJNA350620, PRJNA390523, PRJNA483996, PRJNA489399, PRJNA268101, PRJNA344912	SAMEA1705934		Publicly available genomes				
+S. maltophilia	PRJDB3841, PRJNA267549, PRJNA231221, PRJNA164599, PRJNA380601, PRJNA350620, PRJNA390523, PRJNA483996, PRJNA489399, PRJNA268101, PRJNA344912	SAMEA1705934		Publicly available genomes				
