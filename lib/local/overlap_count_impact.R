@@ -1,4 +1,6 @@
 # Goal: find all of the SNPs in overlapping positions per dataset. 
+# This script takes in data prepared on the HPC (parsed .Rdata snpmats) and 
+# summarizes their overlapping genes and SNPs. 
 
 library(tidyverse)
 source("lib/local/multiallelic_lib.R")
@@ -93,18 +95,22 @@ write_tsv(x = summary,
 
 ## SAVE INFO ON OVERLAPPING POS NUMBER AND OVERLAPPING GENE NUMBER
 overlap_stats <- as.data.frame(matrix(NA, nrow = num_project, ncol = 3))
-colnames(overlap_stats) <- c("Project", "Overlapping_SNP_loci", "Overlapping_Genes_w_SNPs")
+colnames(overlap_stats) <- 
+  c("Project", "Overlapping_SNP_loci", "Overlapping_Genes_w_SNPs")
 for (i in 1:num_project) {
   print(project_df$projects[i])
   snpmat <- load_parsed_snpmat_by_project(project_df$projects[i])
   if (!is.null(snpmat)) {
     overlap_logical <- snpmat$allele$annots$rows_with_overlapping_genes_log
-    num_unique_overlap_SNP_pos <- length(unique(snpmat$allele$annots$pos[overlap_logical]))
-    num_unique_overlap_genes_with_SNP <- length(unique(snpmat$allele$annots$locus_tag[overlap_logical]))
+    num_unique_overlap_SNP_pos <- 
+      length(unique(snpmat$allele$annots$pos[overlap_logical]))
+    num_unique_overlap_genes_with_SNP <-
+      length(unique(snpmat$allele$annots$locus_tag[overlap_logical]))
 
     overlap_stats$Project[i] <- project_df$projects[i] 
     overlap_stats$Overlapping_SNP_loci[i] <- num_unique_overlap_SNP_pos
-    overlap_stats$Overlapping_Genes_w_SNPs[i] <- num_unique_overlap_genes_with_SNP
+    overlap_stats$Overlapping_Genes_w_SNPs[i] <-
+      num_unique_overlap_genes_with_SNP
   }
 }
 
