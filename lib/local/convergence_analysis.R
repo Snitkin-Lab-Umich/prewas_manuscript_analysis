@@ -4,7 +4,7 @@
 # number of times convergence occurs. Data analyzed in this script are used for
 # Figure S2D. 
 
-data_dir <- "data/local/convergence/"
+data_dir <- "data/hpc/convergence/"
 source("lib/local/multiallelic_lib.R")
 bi_mat <- "_biallelic_transition_matrix.csv"
 multi_mat <- "_multiallelic_transition_matrix.csv"
@@ -133,3 +133,4 @@ results_mat[2, 1] <- as.character(round(ks_results$p.value, 10))
 results_mat[3, 1] <- as.character(round(subset_sig_percent, 3))
 
 write.csv(results_mat, file = "data/local/convergence/convergence_ks_test.csv")
+# The two  distributions ARE significantly different
