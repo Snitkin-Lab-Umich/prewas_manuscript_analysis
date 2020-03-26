@@ -37,6 +37,19 @@ save_as_pdf_eps_png <- function(file_prefix, width_size, height_size){
          device = "png")
 }
 
+# Update Dataset name for final publication
+rename_datasets <- function(df) {
+  df$Dataset[df$Dataset == "C. difficile #3"] <- "C. difficile #1"
+  df$Dataset[df$Dataset == "C. difficile #4"] <- "C. difficile #2"
+  df$Dataset[df$Dataset == "E. faecium #1"] <- "E. faecium"
+  df$Dataset[df$Dataset == "E. faecalis #1" ] <- "E. faecalis" 
+  df$Dataset[df$Dataset == "K. pneumoniae #1"] <- "K. pneumoniae"
+  df$Dataset[df$Dataset == "L. crispatus #1" ] <- "L. crispatus" 
+  df$Dataset[df$Dataset == "S. maltophilia #1"] <- "S. maltophilia"
+  return(df)
+}
+
+
 # Read in Multiallelic Data ----------------------------------------------------
 variant_summary <- read_tsv("data/local/multiallelic/multiallelic_summary.tsv")
 snp_mat_summary <- read_tsv("data/local/multiallelic/multiallelic_summary_subsampled.tsv")
@@ -64,6 +77,7 @@ convergence <- convergence %>% filter(!Project %in% drop_projects)
 
 # Figure 2: Multiallelic Plots -------------------------------------------------
 ## 2A: % Multiallelic while subsampling datasets --------------------------------
+snp_mat_grouped <- rename_datasets(snp_mat_grouped)
 snp_mat_grouped %>%
   ggplot(aes(x = Percent / 100,
              y = AvgNumMultiallelicSite / AvgNumVariantSite,
@@ -96,6 +110,7 @@ r_string <- paste("~R^2==~", r2)
 x_pos <- max(variant_summary$MeanSNPDist) * 0.85
 y_pos <-
   min(variant_summary$NumMultiallelicSite / variant_summary$NumVariantSite)
+variant_summary <- rename_datasets(variant_summary)
 variant_summary %>%
   ggplot(aes(x = MeanSNPDist, y = NumMultiallelicSite/NumVariantSite)) +
   geom_point(mapping = aes(color = Dataset, size = `Dataset Size (#)`)) +
@@ -276,9 +291,9 @@ save_as_pdf_eps_png("Figure_S2D_convergence",
                     default_height)
 
 # Read in Reference Allele Data ------------------------------------------------
-frac_mismatch = read.table('data/frac_mismatch.tsv')
-num_mismatch = read.table('data/num_mismatch.tsv')
-anc_probs = read.table('data/anc_probs.tsv')
+frac_mismatch = read.table('data/local/ref_allele/frac_mismatch.tsv')
+num_mismatch = read.table('data/local/ref_allele/num_mismatch.tsv')
+anc_probs = read.table('data/local/ref_allele/anc_probs.tsv')
 
 anc_probs <- anc_probs %>% filter(!dat %in% drop_projects)
 
@@ -423,16 +438,20 @@ her_ests$phen_type[her_ests$phen_type == 'wn'] = 'WN'
 he = her_ests[her_ests$pw_type == 'multi',]
 he$diff = (her_ests$her_est[her_ests$pw_type == 'multi'] - her_ests$her_est[her_ests$pw_type == 'no multi'])*100
 
-ggplot(he, aes(x=phen_type,y=diff)) + geom_boxplot() + geom_jitter(aes(col=dataset),size=3) + facet_grid(cols = vars(prewas_run)) + 
-  xlab('Phenotype Evolutionary Model') + ylab('Heritability with multiallelic -\nHeritability without multiallelic (%)') + 
-  scale_color_manual(name = 'Dataset',values = colors, labels = proj_name) + 
+ggplot(he, aes(x = phen_type, y = diff)) + 
+  geom_boxplot() + 
+  geom_jitter(aes(col=dataset),size = 4) + 
+  facet_grid(cols = vars(prewas_run)) + 
+  xlab('Phenotype Evolutionary Model') +
+  ylab('Heritability with multiallelic -\nHeritability without multiallelic (%)') + 
+  scale_color_manual(name = 'Dataset', values = colors, labels = proj_name) + 
   theme_bw() +
   theme(text = element_text(size = 10))
 
 save_as_pdf_eps_png("Figure_S3_heritability_estimate_differences", 6, 4)
 
-# Figure S3 --------------------------------------------------------------------
-## S3A Number of Overlapping Genes ----------------------------------------------
+# Figure S5 --------------------------------------------------------------------
+## S5A Number of Overlapping Genes ----------------------------------------------
 overlap_stats <- left_join(overlap_stats, project_key, by = "Project")
 overlap_stats <- overlap_stats %>% filter(!is.na(Dataset))
 overlap_stats <- left_join(overlap_stats, project_key,
@@ -459,7 +478,7 @@ save_as_pdf_eps_png("Figure_S5A_overlap_SNP_count",
                     default_width,
                     default_height)
 
-## S3B Number of Overlapping Positions ------------------------------------------
+## S5B Number of Overlapping Positions ------------------------------------------
 overlap_stats %>%
   select(c(Overlapping_Genes_w_SNPs, Dataset, hex_color)) %>%
   ggplot() +
@@ -548,8 +567,6 @@ dev.off()
 png("figures/Figure_S6B_prewas_reource_usage.png", width = 16, height = 6, units = "in", res = 500)
 grid.arrange(memory_plot, time_plot, legend, ncol = 3)
 dev.off()
-
-
 
 sink("data/local/table/numbers_for_paper.txt")
 'Number of datasets:'
