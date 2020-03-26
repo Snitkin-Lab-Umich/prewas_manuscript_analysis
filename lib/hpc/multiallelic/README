@@ -1,0 +1,9 @@
+These analyses were originally performed on the Snitkin lab server: /nfs/esnitkin/Project_Prep_GWAS_Variants/Analysis/Prep_GWAS_SNPs/2019-12-04_analysis_with_sbat/. 
+
+General function library: multiallelic_lib.R and subsample_lib.R
+Scripts to summarize multiallelic data (example here for Sa_1 dataset): generate_multiallelic_site_summary_Sa_1.R and generate_Sa_1_multiallelic_site_10_percent.R
+Scripts to generate HPC job files: write_multiallelic_summary_sbat.R and write_subsample_diveristy_sbat.R
+HPC job files (example here for Sa_1 dataset): summarize_multiallelic_in_Sa_1.sbat and run_Sa_1_subsampled_to_10_percent.sbat
+
+
+
