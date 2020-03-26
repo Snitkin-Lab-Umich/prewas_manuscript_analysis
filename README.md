@@ -26,7 +26,7 @@ Both `data/local` and `data/hpc` are subdivided by analysis.
 
 `data/key` contains several files necessary for plotting the data correctly (color palettes and data labels). 
 ##### lib
-The `ilb` direcotry contains two subdirectories: 
+The `lib` direcotry contains two subdirectories: 
 
 * `hpc`
 * `local` 
