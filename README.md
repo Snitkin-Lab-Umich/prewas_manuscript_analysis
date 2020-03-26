@@ -8,9 +8,38 @@ Katie Saund* (https://orcid.org/0000-0002-6214-6713), Zena Lapp* (https://orcid.
 \*Equal contribution 
 
 ### Repository contents
-This repository includes the R code necessary to generate the figures in the manuscript.  
-`lib/plot_figures.R` will use the data in `data` to plot the figures in `figures`. 
-  
+This repository includes the R code necessary to perform analyses and generate the figures in the manuscript.  
+
+#### How to use this repository
+##### data
+The `data` direcotry contains three subdirectories: 
+
+* `hpc`
+* `local` 
+* `key`
+
+`data/hpc` contains data we generated using our high performance computing cluster (hpc). There are scripts available so that you could adapt them for your computer system, but they are slow and/or computationally intensive analyses.
+
+`data/local` contains the data the can be generated quickly on a desktop computer in R using the scripts in `lib/local` starting from data in `data/hpc` and `data/key`
+
+Both `data/local` and `data/hpc` are subdivided by analysis. 
+
+`data/key` contains several files necessary for plotting the data correctly (color palettes and data labels). 
+##### lib
+The `ilb` direcotry contains two subdirectories: 
+
+* `hpc`
+* `local` 
+
+`lib/hpc` contains example scripts and functions used to generate the data in `data/hpc.` These scripts will not run "as is." They are provided so that users could adapt the code to their particular computer system. 
+
+`lib/local` contains scripts to perform any data analysis necessary to convert data in `data/hpc` into a form ready to be plotted. The script `lib/local/plot_figures.R` will use the provided data in `data/` to generate the figures in `figures/.` Scripts are written to be run from the `prewas_manuscript_analysis/` directory.
+
+Both `lib/local` and `lib/hpc` are subdivided by analysis. 
+
+##### figures
+The plots found here were generated with the script `lib/local/plot_figures.R` The plots in this directory were finalized in Adobe Illustrator (joining panels together into one figure, resizing, etc..). 
+
 ### Sequence data  
 All genome sequences available on NCBI (see Table S1). 
   
