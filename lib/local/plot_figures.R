@@ -419,7 +419,7 @@ save_as_pdf_eps_png("Figure_4A_overlap_functional_impact",
 
 # Figure S4 Heritability Estimate Differences
 cols = project_key 
-her_ests = read.csv('data/her_ests_shared.csv', header = F, stringsAsFactors = F)
+her_ests = read.csv('data/local/heritability/her_ests_shared.csv', header = F, stringsAsFactors = F)
 colors = cols$hex_color
 names(colors) = cols$Project
 proj_name = cols$Dataset
