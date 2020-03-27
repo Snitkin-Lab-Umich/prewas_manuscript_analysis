@@ -1,9 +1,14 @@
+# This library contains many functions used by seveveral analyses, including
+# multiallelic, convergence, and overlap. 
+
 # Libs -------------------------------------------------------------------------
 library(tidyverse)
 library(reshape2)
 
 # Data needed to run multiallelic stuff ----------------------------------------
 one_row <- 1
+
+# Genome sizes by species
 Cd_size <- 4300000
 Kp_size <- 5400000
 Sa_size <- 2800000
@@ -69,6 +74,7 @@ data_col_names <- c("Project",
 
 # Functions --------------------------------------------------------------------
 # This function only works for SNP matrices
+# Subset a matrix to only variant sites (invariant sites are removed)
 keep_only_variant_sites <- function(mat){
   rows_to_keep <- apply(mat, 1, function(row){
     sum(unique(row) %in% c("A", "T", "G", "C"))
@@ -105,18 +111,22 @@ calc_snp_dist <- function(mat){
   snp_dist <- snp_dist_mat[lower.tri(snp_dist_mat)]
   return(snp_dist)
 }  
+
+# Format empty df
 generate_storage_df <- function(){
   data <- as_tibble(matrix(NA, ncol = length(data_col_names), nrow = 15))
   colnames(data) <- data_col_names
   return(data)
 }
 
+# Format empty df
 generate_single_df <- function(){
   data <- as_tibble(matrix(NA, ncol = length(data_col_names), nrow = 1))
   colnames(data) <- data_col_names
   return(data)
 }
 
+# Format empty df
 generate_nrow_df <- function(num_row){
   data <- as_tibble(matrix(NA, ncol = length(data_col_names), nrow = num_row))
   colnames(data) <- data_col_names
@@ -134,6 +144,7 @@ read_snpmat <- function(path){
   return(mat)
 }
 
+# Count the number of overlapping genes given a snpmat
 count_overlapping_genes <- function(mat){
   #identify the rows with multiple annotations
   mult_annot <-
@@ -155,6 +166,7 @@ count_overlapping_genes <- function(mat){
   return(num_rows_with_overlapping_genes)
 }
 
+# Summarize a lot of multiallelic data
 fill_in_data <- function(data_mat,
                          mat,
                          row_num,

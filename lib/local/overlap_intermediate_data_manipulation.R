@@ -1,4 +1,5 @@
 # Goal: find all of the SNPs in overlapping positions per dataset.
+# Data summarized in this analysis is plotted in Figure 4 and Figure S5. 
 library(tidyverse)
 source("lib/local/multiallelic_lib.R")
 

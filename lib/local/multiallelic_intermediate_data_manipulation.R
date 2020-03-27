@@ -1,3 +1,8 @@
+# This script takes in data generated on the HPC and summarizes and reformats it
+# here. The goal of this script is to describe the prevalence of multiallelic
+# sites in the bacterial data. Data from these analyses are plotted in Figures
+# 2 and S2. 
+
 # Read in all multiallelic summary data (full and subsampled, store nicely here)
 source("lib/local/multiallelic_lib.R")
 data_dir <- "data/hpc/multiallelic/"
