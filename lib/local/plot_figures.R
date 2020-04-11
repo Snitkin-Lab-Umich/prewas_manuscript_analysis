@@ -39,13 +39,15 @@ save_as_pdf_eps_png <- function(file_prefix, width_size, height_size){
 
 # Update Dataset name for final publication
 rename_datasets <- function(df) {
-  df$Dataset[df$Dataset == "C. difficile #3"] <- "C. difficile #1"
-  df$Dataset[df$Dataset == "C. difficile #4"] <- "C. difficile #2"
+  df$Dataset[df$Dataset == "C. difficile #3"] <- "C. difficile no. 1"
+  df$Dataset[df$Dataset == "C. difficile #4"] <- "C. difficile no. 2"
   df$Dataset[df$Dataset == "E. faecium #1"] <- "E. faecium"
   df$Dataset[df$Dataset == "E. faecalis #1" ] <- "E. faecalis" 
   df$Dataset[df$Dataset == "K. pneumoniae #1"] <- "K. pneumoniae"
   df$Dataset[df$Dataset == "L. crispatus #1" ] <- "L. crispatus" 
   df$Dataset[df$Dataset == "S. maltophilia #1"] <- "S. maltophilia"
+  df$Dataset[df$Dataset == "S. aureus #1"] <- "S. aureus no. 1"
+  df$Dataset[df$Dataset == "S. aureus #2"] <- "S. aureus no. 2"
   return(df)
 }
 
@@ -87,12 +89,23 @@ snp_mat_grouped %>%
   theme_bw() +
   scale_y_continuous(labels = scales::percent_format(accuracy = .1)) +
   scale_x_continuous(labels = scales::percent) +
-  scale_color_manual(values = palette) +
-  ylab("All Multiallelic Sites / All Variant Sites") +
-  xlab("Dataset Subset") +
+  #scale_color_manual(values = palette) +
+  ylab("All multiallelic sites / all variant sites") +
+  xlab("Dataset subset") +
   theme(axis.text.x = element_text(color = "black"),
         axis.text.y = element_text(color = "black")) +
-  theme(text = element_text(size = default_font_size))
+  theme(text = element_text(size = default_font_size)) + 
+  scale_color_manual(values = palette, 
+                     labels = c(expression(paste(italic("C. difficile "), "no. 1")), 
+                                expression(paste(italic("C. difficile "), "no. 2")), 
+                                expression(italic("E. faecalis")), 
+                                expression(italic("E. faecium")), 
+                                expression(italic("K. pneumoniae")), 
+                                expression(italic("L. crispatus")), 
+                                expression(paste(italic("S. aureus "), "no. 1")), 
+                                expression(paste(italic("S. aureus "), "no. 2")), 
+                                expression(italic("S. maltophila")))) +
+  theme(legend.text.align = 0)
 
 save_as_pdf_eps_png("Figure_2A_multiallelic_vs_subsample",
                     default_width,
@@ -111,18 +124,19 @@ x_pos <- max(variant_summary$MeanSNPDist) * 0.85
 y_pos <-
   min(variant_summary$NumMultiallelicSite / variant_summary$NumVariantSite)
 variant_summary <- rename_datasets(variant_summary)
+
 variant_summary %>%
+  mutate(`Dataset size (#)` = `Dataset Size (#)`) %>% 
   ggplot(aes(x = MeanSNPDist, y = NumMultiallelicSite/NumVariantSite)) +
-  geom_point(mapping = aes(color = Dataset, size = `Dataset Size (#)`)) +
+  geom_point(mapping = aes(color = Dataset, size = `Dataset size (#)`)) +
   theme_bw() +
   geom_smooth(method = "lm",
               se = FALSE,
               color = "black",
               size = default_line_size) +
   scale_color_manual(values = palette) +
-  ylab("All Multiallelic Sites / All Variant Sites") +
-  xlab("Mean Pairwise SNP Distance (BP)") +
-  scale_x_continuous(labels = scales::comma) +
+  ylab("All multiallelic sites / all variant sites") +
+  xlab("Mean pairwise SNP distance (BP)") +
   guides(color = FALSE) +
   theme(text = element_text(size = default_font_size)) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 0.1)) +
@@ -190,9 +204,8 @@ variant_summary %>%
               se = FALSE,
               color = "black",
               size = default_line_size) +
-  ylab("All Multiallelic Sites / All Variant Sites") +
+  ylab("All multiallelic sites / all variant sites") +
   xlab("Samples") +
-  scale_color_manual(values = palette) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 0.1)) +
   theme(text = element_text(size = default_font_size)) +
   annotate("text",
@@ -202,7 +215,18 @@ variant_summary %>%
            label = r_string,
            parse = TRUE) +
   theme(axis.text.x = element_text(color = "black"),
-        axis.text.y = element_text(color = "black"))
+        axis.text.y = element_text(color = "black")) + 
+  scale_color_manual(values = palette, 
+                     labels = c(expression(paste(italic("C. difficile "), "no. 1")), 
+                                expression(paste(italic("C. difficile "), "no. 2")), 
+                                expression(italic("E. faecalis")), 
+                                expression(italic("E. faecium")), 
+                                expression(italic("K. pneumoniae")), 
+                                expression(italic("L. crispatus")), 
+                                expression(paste(italic("S. aureus "), "no. 1")), 
+                                expression(paste(italic("S. aureus "), "no. 2")), 
+                                expression(italic("S. maltophila")))) +
+  theme(legend.text.align = 0)
 
 save_as_pdf_eps_png("Figure_S2A_multiallelic_vs_num_sample",
                     default_width,
@@ -226,16 +250,26 @@ functional_impact_long %>%
   geom_boxplot(color = "black",
                alpha = 1.0,
                size = default_line_size) +
-  ylab("Multiallelic Sites / Variant Sites") +
-  xlab("Predicted Functional Impact") +
+  ylab("Multiallelic sites / variant sites") +
+  xlab("Predicted functional impact") +
   theme_bw() +
   geom_jitter(aes(color = Dataset),
               size = default_dot_size) +
-  scale_color_manual(values = palette) +
   theme(text = element_text(size = default_font_size)) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   theme(axis.text.x = element_text(color = "black"),
-        axis.text.y = element_text(color = "black"))
+        axis.text.y = element_text(color = "black")) + 
+  scale_color_manual(values = palette, 
+                     labels = c(expression(paste(italic("C. difficile "), "no. 1")), 
+                                expression(paste(italic("C. difficile "), "no. 2")), 
+                                expression(italic("E. faecalis")), 
+                                expression(italic("E. faecium")), 
+                                expression(italic("K. pneumoniae")), 
+                                expression(italic("L. crispatus")), 
+                                expression(paste(italic("S. aureus "), "no. 1")), 
+                                expression(paste(italic("S. aureus "), "no. 2")), 
+                                expression(italic("S. maltophila")))) +
+  theme(legend.text.align = 0)
 
 save_as_pdf_eps_png("Figure_S2B_multiallelic_functional_impact",
                     default_width,
@@ -255,15 +289,24 @@ functional_variant_summary_key_df %>%
                          fill = Dataset),
            stat = "identity") +
   theme_bw() +
-  theme(text = element_text(size = default_font_size)) +
+  theme(text = element_text(size = default_font_size), 
+        axis.text.x = element_text(angle = 90, color = "black", hjust = 1), 
+        legend.position = "none", 
+        axis.text.y = element_text(color = "black")) +
   ylab("Functional impact mismatches") +
   xlab("") +
-  scale_fill_manual(values = palette)  +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  theme(legend.position = "none") +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
-  theme(axis.text.x = element_text(color = "black"),
-        axis.text.y = element_text(color = "black"))
+  scale_fill_manual(values = palette) +
+  scale_x_discrete(labels = c(
+                      expression(italic("K. pneumoniae")), 
+                      expression(italic("S. maltophila")), 
+                      expression(italic("E. faecalis")), 
+                      expression(paste(italic("S. aureus "), "no. 1")), 
+                      expression(italic("L. crispatus")), 
+                      expression(italic("E. faecium")), 
+                      expression(paste(italic("C. difficile "), "no. 1")),
+                      expression(paste(italic("S. aureus "), "no. 2")), 
+                      expression(paste(italic("C. difficile "), "no. 2"))))
 
 save_as_pdf_eps_png("Figure_S2C_multiallelic_functional_impact",
                     default_width,
@@ -271,17 +314,18 @@ save_as_pdf_eps_png("Figure_S2C_multiallelic_functional_impact",
 
 ## S2D: Convergence on tree -----------------------------------------------------
 convergence %>%
+  mutate(`Locus type` = `Locus Type`) %>% 
   filter(Num_Convergence_Events_8_bin %in%
            c("0", "1", "2", "3", "4", "5", "6", "7", ">7")) %>%
   ggplot(aes(x = Num_Convergence_Events_8_bin,
              y = relative_frequency / 100,
-             col = `Locus Type`)) +
+             col = `Locus type`)) +
   geom_boxplot(size = default_line_size / 2) +
   theme_bw() +
-  scale_color_manual(values = c("grey","black")) +
+  scale_color_manual(values = c("grey","black"), labels = c("Biallelic", "Multiallelic")) +
   scale_y_continuous(labels = scales::percent) +
-  xlab("Convergence Events Per SNP") +
-  ylab("Relative Frequency") +
+  xlab("Convergence events per SNP") +
+  ylab("Relative frequency") +
   scale_x_discrete(limits = c("0", "1", "2", "3", "4", "5", "6", "7", ">7")) +
   theme(text = element_text(size = default_font_size)) +
   theme(axis.text.x = element_text(color = "black"),
@@ -312,13 +356,12 @@ fm %>%
              y = value,
              fill = object)) +
   geom_bar(stat = 'identity', position = position_dodge()) +
-  xlab('') +
   ylab('Reference allele mismatch') +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
-  scale_fill_manual(name = "Mismatched Allele", 
-                    labels = c(expression(paste("Ref. Genome" != "Major"), 
-                               paste("Ref. Genome" != "Ancestral"), 
-                               paste("Major" != "Ancestral"))),
+  scale_fill_manual(name = "Mismatched allele", 
+                    labels = c(expression(paste("Ref. genome" != "major"), 
+                               paste("Ref. genome" != "ancestral"), 
+                               paste("Major" != "ancestral"))),
                     values = c(color_key$hex_color[color_key$object == "ref_maj"],
                                color_key$hex_color[color_key$object == "ref_anc"],
                                color_key$hex_color[color_key$object == "maj_anc"])) +
@@ -327,7 +370,18 @@ fm %>%
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   theme(text = element_text(size = default_font_size * .8)) +
   theme(axis.text.x = element_text(color = "black"),
-        axis.text.y = element_text(color = "black"))
+        axis.text.y = element_text(color = "black")) + 
+  xlab('') +
+  scale_x_discrete(labels = c(
+    expression(paste(italic("S. aureus "), "no. 1")), 
+    expression(italic("K. pneumoniae")), 
+    expression(paste(italic("S. aureus "), "no. 2")), 
+    expression(italic("E. faecalis")), 
+    expression(paste(italic("C. difficile "), "no. 2")), 
+    expression(paste(italic("C. difficile "), "no. 1")),
+    expression(italic("S. maltophila")), 
+    expression(italic("E. faecium")), 
+    expression(italic("L. crispatus"))))
 save_as_pdf_eps_png("Figure_3A_allele_mismatch_correct_equals_sign",
                     default_width,
                     default_height)
@@ -351,17 +405,28 @@ ggplot(anc_probs[anc_probs$low_conf == TRUE,],
        aes(x = reorder(Dataset, perc),y = perc, fill = Dataset)) +
   geom_bar(stat = 'identity') +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
-  scale_fill_manual(values = palette) +
-  scale_x_discrete(limits = dataset_order) +
+  #scale_fill_manual(values = palette) +
+  #scale_x_discrete(limits = dataset_order) +
   xlab('') +
-  ylab('Low confidence ancestral reconstruction') +
+  ylab('Low-confidence ancestral reconstruction') +
   theme_bw() +
   theme(text = element_text(size = default_font_size * .8)) +
   theme(legend.position = "none") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  
   theme(axis.text.x = element_text(color = "black"),
-        axis.text.y = element_text(color = "black"))
+        axis.text.y = element_text(color = "black")) + 
+  scale_fill_manual(values = palette) + 
+  scale_x_discrete(limits = dataset_order, 
+                   labels = c(
+    expression(paste(italic("S. aureus "), "no. 1")), 
+    expression(italic("K. pneumoniae")), 
+    expression(paste(italic("S. aureus "), "no. 2")), 
+    expression(italic("E. faecalis")), 
+    expression(paste(italic("C. difficile "), "no. 2")), 
+    expression(paste(italic("C. difficile "), "no. 1")),
+    expression(italic("S. maltophila")), 
+    expression(italic("E. faecium")), 
+    expression(italic("L. crispatus"))))
 save_as_pdf_eps_png("Figure_3B_ancestral_reconstruction",
                     default_width * .5,
                     default_height)
@@ -400,8 +465,8 @@ long_overlap_snpeff_summary %>%
   xlab('') +
   ylab('Functional impact mismatch') +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
-  scale_fill_manual(name = "Predicted Functional Impact",
-                    labels = c("High & Moderate", "High & Low", "Moderate & Low"),
+  scale_fill_manual(name = "Predicted functional impact",
+                    labels = c("High & moderate", "High & low", "Moderate & low"),
                     values = c(color_key$hex_color[color_key$object == "mod_hi"],
                                color_key$hex_color[color_key$object == "low_hi"],
                                color_key$hex_color[color_key$object == "low_mod"])) +
@@ -411,7 +476,18 @@ long_overlap_snpeff_summary %>%
   theme(axis.text.x = element_text(color = "black"),
         axis.text.y = element_text(color = "black")) +
   theme(legend.title = element_text(size = default_font_size * .6),
-        legend.text = element_text(size = default_font_size * .6))
+        legend.text = element_text(size = default_font_size * .6)) + 
+  scale_x_discrete(labels = c(
+    expression(paste(italic("C. difficile "), "no. 1")),
+    expression(italic("S. maltophila")), 
+    expression(paste(italic("C. difficile "), "no. 2")),
+    expression(paste(italic("S. aureus "), "no. 2")), 
+    expression(paste(italic("S. aureus "), "no. 1")), 
+    expression(italic("E. faecium")), 
+    expression(italic("K. pneumoniae")), 
+    expression(italic("L. crispatus")),
+    expression(italic("E. faecalis"))))
+    
 save_as_pdf_eps_png("Figure_4A_overlap_functional_impact",
                     default_width,
                     default_height)
@@ -428,24 +504,36 @@ names(proj_name) = cols$Project
 names(her_ests) = c('datname','phen_type','ref_type','multi_type','her_est')
 
 her_ests$dataset = gsub('_prewas.*','',her_ests$datname)
-#her_ests$prewas_run = gsub('.*prewas_output_with_ancestral_reconstruction_given_tree','',her_ests$datname)
-# her_ests$prewas_run[her_ests$prewas_run == 'no_ancestral_reconstruction_no_tree_given'] = 'Major Allele'
-# her_ests$prewas_run[her_ests$prewas_run == 'with_ancestral_reconstruction_no_tree_given'] = 'AR + NJ tree'
-# her_ests$prewas_run[her_ests$prewas_run == 'with_ancestral_reconstruction_given_tree'] = 'AR + ML tree'
 her_ests$phen_type[her_ests$phen_type == 'bm'] = 'BM'
 her_ests$phen_type[her_ests$phen_type == 'wn'] = 'WN'
 her_ests$ref_type[her_ests$ref_type == 'anc'] = 'Ancestral allele'
 her_ests$ref_type[her_ests$ref_type == 'maj'] = 'Major allele'
-her_ests$ref_type[her_ests$ref_type == 'ref'] = 'Ref. Genome allele'
+her_ests$ref_type[her_ests$ref_type == 'ref'] = 'Ref. genome allele'
 her_ests$multi_type[her_ests$multi_type == 'multi'] = 'With multiallelic sites'
 her_ests$multi_type[her_ests$multi_type == 'nomulti'] = 'Without multiallelic sites'
 
-ggplot(her_ests, aes(x=phen_type,y=her_est*100)) + geom_jitter(aes(col=dataset),size=3) + #geom_boxplot() +
-facet_grid(multi_type ~ ref_type) +
-xlab('Phenotype Evolutionary Model') + ylab('Heritability estimate (%)') +
-scale_color_manual(name = 'Dataset',values = colors, labels = proj_name) +
-theme_bw() +
-theme(text = element_text(size=10))
+her_ests %>% 
+  ggplot(aes(x = phen_type, y = her_est * 100)) + 
+  geom_jitter(aes(col = dataset), size = 3) + 
+  facet_grid(multi_type ~ ref_type) +
+  xlab('Phenotype evolutionary model') + 
+  ylab('Heritability estimate (%)') +
+  scale_color_manual(name = 'Dataset',
+                     values = colors,
+                     #labels = proj_name) +
+                     labels = c(expression(paste(italic("C. difficile "), "no. 1")), 
+                                expression(paste(italic("C. difficile "), "no. 2")), 
+                                expression(italic("E. faecalis")), 
+                                expression(italic("E. faecium")), 
+                                expression(italic("K. pneumoniae")), 
+                                expression(italic("L. crispatus")), 
+                                expression(paste(italic("S. aureus "), "no. 1")), 
+                                expression(paste(italic("S. aureus "), "no. 2")), 
+                                expression(italic("S. maltophila")))) + 
+  theme_bw() + 
+  theme(text = element_text(size = 10)) + 
+  theme(legend.text.align = 0)
+
 
 save_as_pdf_eps_png("Figure_S4_heritability_estimate_differences", 6, 4)
 
@@ -465,13 +553,23 @@ overlap_stats %>%
            size = 2,
            stat = "identity") +
   theme_bw() +
-  scale_color_manual(values = palette)  +
+  scale_color_manual(values = palette) +
   theme(text = element_text(size = default_font_size)) +
   ylab("SNPs found in overlapping genes") +
   xlab("") +
   theme(legend.position = "none") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, color = "black"),
-        axis.text.y = element_text(color = "black"))
+        axis.text.y = element_text(color = "black")) + 
+  scale_x_discrete(labels = c(
+    expression(italic("E. faecium")), 
+    expression(italic("E. faecalis")),
+    expression(italic("L. crispatus")),
+    expression(paste(italic("S. aureus "), "no. 2")), 
+    expression(italic("K. pneumoniae")), 
+    expression(paste(italic("S. aureus "), "no. 1")), 
+    expression(italic("S. maltophila")), 
+    expression(paste(italic("C. difficile "), "no. 2")),
+    expression(paste(italic("C. difficile "), "no. 1"))))
 
 save_as_pdf_eps_png("Figure_S5A_overlap_SNP_count",
                     default_width,
@@ -495,7 +593,18 @@ overlap_stats %>%
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   theme(legend.position = "none") +
   theme(axis.text.x = element_text(color = "black"),
-        axis.text.y = element_text(color = "black"))
+        axis.text.y = element_text(color = "black")) + 
+  scale_x_discrete(labels = c(
+    expression(italic("E. faecium")), 
+    expression(italic("E. faecalis")),
+    expression(italic("L. crispatus")),
+    expression(paste(italic("S. aureus "), "no. 2")), 
+    expression(paste(italic("S. aureus "), "no. 1")), 
+    expression(italic("K. pneumoniae")), 
+    expression(italic("S. maltophila")), 
+    expression(paste(italic("C. difficile "), "no. 1")),
+    expression(paste(italic("C. difficile "), "no. 2"))))
+
 save_as_pdf_eps_png("Figure_S5B_overlap_gene_count",
                     default_width,
                     default_height)
@@ -522,6 +631,11 @@ get_legend <- function(myggplot){
   return(legend)
 }
 
+usage_df$Tree[usage_df$Tree == "No Tree Provided"] <- "No tree provided"
+usage_df$Tree[usage_df$Tree == "Tree Provided"] <- "Tree provided"
+usage_df$Method[usage_df$Method == "Major Allele"] <- "Major allele"
+usage_df$Method[usage_df$Method == "Ancestral Reconstruction"] <- "Ancestral reconstruction"
+
 # Remove cores == 4
 usage_df <- usage_df %>% filter(`Cores (#)` != "4")
 
@@ -542,7 +656,8 @@ memory_plot <- usage_df %>%
   scale_y_continuous(minor_breaks = seq(1, 30, 1))
 
 time_plot <- usage_df %>% 
-  ggplot(aes(x = `Variants (#)`, y = `Time (Hours)`)) + 
+  mutate(`Time (hours)` = `Time (Hours)`) %>% 
+  ggplot(aes(x = `Variants (#)`, y = `Time (hours)`)) + 
   geom_point(aes(shape = Tree, 
                  size = `Cores (#)`, 
                  color = Dataset)) + 
@@ -551,10 +666,20 @@ time_plot <- usage_df %>%
   theme(text = element_text(size = 15),
         axis.text.x = element_text(color = "black", angle = 90, vjust = 0.5),
         axis.text.y = element_text(color = "black")) + 
-  scale_color_manual(values = resource_palette) +
   scale_size_discrete(range = c(1.5, 3)) + 
   facet_wrap(~ Method) +
-  scale_y_continuous(minor_breaks = seq(1, 40, 1))
+  scale_y_continuous(minor_breaks = seq(1, 40, 1)) + 
+  scale_color_manual(values = resource_palette, 
+                     labels = c(expression(paste(italic("C. difficile "), "no. 1")), 
+                                expression(paste(italic("C. difficile "), "no. 2")), 
+                                expression(italic("E. faecalis")), 
+                                expression(italic("E. faecium")), 
+                                expression(italic("K. pneumoniae")), 
+                                expression(italic("L. crispatus")), 
+                                expression(paste(italic("S. aureus "), "no. 1")), 
+                                expression(paste(italic("S. aureus "), "no. 2")), 
+                                expression(italic("S. maltophila")))) +
+  theme(legend.text.align = 0)
 
 legend <- get_legend(time_plot)
 
