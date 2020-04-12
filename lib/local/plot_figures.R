@@ -523,13 +523,11 @@ her_ests %>%
                      #labels = proj_name) +
                      labels = c(expression(paste(italic("C. difficile "), "no. 1")), 
                                 expression(paste(italic("C. difficile "), "no. 2")), 
-                                expression(italic("E. faecalis")), 
                                 expression(italic("E. faecium")), 
-                                expression(italic("K. pneumoniae")), 
+                                expression(italic("E. faecalis")), 
                                 expression(italic("L. crispatus")), 
                                 expression(paste(italic("S. aureus "), "no. 1")), 
-                                expression(paste(italic("S. aureus "), "no. 2")), 
-                                expression(italic("S. maltophila")))) + 
+                                expression(paste(italic("S. aureus "), "no. 2")))) + 
   theme_bw() + 
   theme(text = element_text(size = 10)) + 
   theme(legend.text.align = 0)
